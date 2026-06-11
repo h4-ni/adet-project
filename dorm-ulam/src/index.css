@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:root {
+  /* Declare custom Theme variables to use in Tailwind! */
+  --color-brand-orange: #FF7A2E;
+  --color-brand-cyan: #2EE5FF;
+  --color-brand-purple: #8A5CFF;
+  --color-brand-dark: #1A1C1E;
+}
