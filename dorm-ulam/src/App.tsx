@@ -23,12 +23,16 @@ export default function App() {
   }
 
   return (
-    <div className="app-wrapper">
-      {activeTab === 'home' && <Home onSettings={() => setScreen('settings')} />}
-      {activeTab === 'cook' && <Cook />}
-      {activeTab === 'discover' && <Discover />}
-      {activeTab === 'saved' && <Saved />}
+    <>
+      <div className="app-wrapper">
+        {activeTab === 'home' && <Home onSettings={() => setScreen('settings')} />}
+        {activeTab === 'cook' && <Cook />}
+        {activeTab === 'discover' && <Discover />}
+        {activeTab === 'saved' && <Saved />}
+      </div>
+
+      {/* Outside app-wrapper so fixed positioning works */}
       <BottomNav active={activeTab} onChange={setActiveTab} />
-    </div>
+    </>
   );
 }
