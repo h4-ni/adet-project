@@ -1,32 +1,42 @@
 .home-screen {
   background-color: #FDDEC9;
   min-height: 100vh;
-  padding: 16px;
-  padding-top: 28px;
   font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;   /* ← add this */
+
 }
 
 .home-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  max-width: 360px;        /* limits how wide the header gets */
-  margin: 0 auto;          /* centers it horizontally */
-  padding-top: 32px;
+  max-width: 360px;
+  margin: 0 auto;
+  padding-top: 48px;
+  padding-bottom: 8px;
+  width: 100%;
 }
 
 .avatar {
   width: 42px;
   height: 42px;
   border-radius: 16px;
-  background-color: #6C5CE7;   /* ← purple */
-  color: white; 
-  font-size:24px;                /* ← white J */
+  background-color: #6C5CE7;
+  color: white;
+  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  flex-shrink: 0;               /* ← stops it from shrinking */
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.avatar:hover {
+  opacity: 0.8;
 }
 
 .search {
@@ -35,8 +45,8 @@
   align-items: center;
   padding: 10px 14px;
   border-radius: 16px;
-  background-color: rgba(255, 255, 255, 0.6); /* white at 60% opacity */
-  border: 2px solid rgba(255, 255, 255, 1);   /* white border at 100% opacity */
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 1);
 }
 
 .search-icon {
@@ -52,37 +62,37 @@
   font-size: 14px;
 }
 
-/* Hero */
+/* Hero — character floats above white card */
 .home-hero {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  position: relative;    /* needed for the overlap trick */
-  margin-top: 24px;
+  margin-bottom: -80px;  /* pulls white card up behind character */
+  margin-top: -30px;      /* adds space from top */
+  position: relative;
+  z-index: 1;            /* keeps character on top */
 }
 
 .hero-image {
   width: 300px;
   height: 300px;
   object-fit: contain;
-  position: relative;
-  z-index: 1;            /* sits on top of the white card */
-  margin-bottom: -20px;
-  margin-top: -35px;      /* pulls the card up behind the image */
 }
 
+/* Inside white card */
 .hero-name {
   font-size: 26px;
   font-weight: bold;
-  margin: -10px 0 4px 0;
+  text-align: center;
+  margin: 0 0 4px 0;
+  padding-top: 24px;     /* space so text isn't hidden behind character */
 }
 
 .hero-subtitle {
   color: #7e7e7e;
   font-size: 16px;
-  font-weight: medium;
-  margin-top: -5px;
-  margin-bottom: 20px;
+  text-align: center;
+  margin: 0 0 24px 0;
 }
 
 /* Ulam of the Day */
@@ -114,10 +124,10 @@
   font-size: 13px;
   color: #73797A;
   margin: 0;
-  background-color: rgba(235, 235, 235, 0.6);  /* EBEBEB at 60% opacity */
+  background-color: rgba(235, 235, 235, 0.6);
   border-radius: 12px;
   padding: 5px 8px;
-  display: inline-flex;    /* ← shrinks to fit the content */
+  display: inline-flex;
   align-items: center;
   gap: 4px;
 }
@@ -141,12 +151,12 @@
   flex-direction: column;
   gap: 12px;
   margin: 5px 27px 15px 27px;
-
 }
 
 .menu-item {
   background: white;
   border-radius: 27px;
+  border: 2px solid #D4D4D4;
   padding: 14px 16px;
   height: 75px;
   display: flex;
