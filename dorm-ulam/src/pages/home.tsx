@@ -5,15 +5,18 @@ interface Props {
   onSettings: () => void;
   onDiscover: () => void;
   onSaved: () => void;
+  user: any;
 }
 
-export default function Home({ onSettings, onDiscover, onSaved }: Props) {
+export default function Home({ onSettings, onDiscover, onSaved, user }: Props) {
   return (
     <div className="home-screen">
 
       {/* SECTION 1: Header */}
       <header className="home-header">
-        <div className="avatar" onClick={onSettings}>J</div>
+        <div className="avatar" onClick={onSettings}>
+          {user?.name?.charAt(0).toUpperCase() ?? 'U'} {/* ← first letter of name */}
+        </div>
         <div className="search">
           <span className="search-icon material-symbols-outlined">search</span>
           <input className="search-input" type="search" placeholder="Search" />
@@ -27,7 +30,7 @@ export default function Home({ onSettings, onDiscover, onSaved }: Props) {
 
       <WhiteCard>
 
-        <h1 className="hero-name">Hi, Joshua!</h1>
+        <h1 className="hero-name">Hi, {user?.name ?? 'User'}!</h1>
         <p className="hero-subtitle">Luto na, G na?</p>
 
         {/* SECTION 3: Ulam of the Day */}

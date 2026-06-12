@@ -1,47 +1,35 @@
+import { useState } from 'react';
 import './recipeMatches.css';
 
-interface Recipe {
-  id: number;
-  name: string;
-  time: string;
-  image: string;
-  liked: boolean;
-  missingIngredient: boolean;
-}
-
-const recipes: Recipe[] = [
-  {
-    id: 1,
-    name: 'Sizzling Hotdog',
-    time: '8 minutes',
-    image: '/sizzling-hotdog.jpg',
-    liked: false,
-    missingIngredient: false,
-  },
-  {
-    id: 2,
-    name: 'Hotdog Fried Rice',
-    time: '6 minutes',
-    image: '/hotdog-friedrice.jpg',
-    liked: true,
-    missingIngredient: false,
-  },
-  {
-    id: 3,
-    name: 'Hotsilog',
-    time: '10 minutes',
-    image: '/hotsilog.jpg',
-    liked: false,
-    missingIngredient: true,
-  },
-];
-
 interface Props {
+  recipes: any[];
+  token: string;
   onBack: () => void;
   onSelectRecipe: () => void;
 }
 
-export default function RecipeMatches({ onBack, onSelectRecipe }: Props) {
+export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }: Props) {
+  const [saved, setSaved] = useState<number[]>([]);
+
+  async function toggleSave(recipeId: number) {
+    const isSaved = saved.includes(recipeId);
+    const method = isSaved ? 'DELETE' : 'POST';
+
+    await fetch(`http://127.0.0.1:8000/api/saved/${recipeId}`, {
+      method,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (isSaved) {
+      setSaved(saved.filter(id => id !== recipeId));
+    } else {
+      setSaved([...saved, recipeId]);
+    }
+  }
+
   return (
     <div className="matches-screen">
 
@@ -59,38 +47,47 @@ export default function RecipeMatches({ onBack, onSelectRecipe }: Props) {
       </div>
 
       {/* SECTION 2: Recipe list */}
-      <div className="matches-list">
-        {recipes.map(recipe => (
-          <div
-            key={recipe.id}
-            className="matches-card"
-            onClick={onSelectRecipe}
-          >
-            <img
-              src={recipe.image}
-              alt={recipe.name}
-              className="matches-card-img"
-            />
-            <div className="matches-card-bottom">
-              <div className="matches-card-info">
-                <div className="matches-name-row">
-                  <p className="matches-card-name">{recipe.name}</p>
-                  {recipe.missingIngredient && (
-                    <span className="missing-badge">Missing Ingredient!</span>
-                  )}
+      {recipes.length === 0 ? (
+        <div style={{ textAlign: 'center', marginTop: '40px', color: '#888' }}>
+          <p>No matching recipes found!</p>
+          <p>Try adding more ingredients.</p>
+        </div>
+      ) : (
+        <div className="matches-list">
+          {recipes.map(recipe => (
+            <div key={recipe.id} className="matches-card" onClick={onSelectRecipe}>
+              <img
+                src={`/${recipe.image}`}
+                alt={recipe.name}
+                className="matches-card-img"
+              />
+              <div className="matches-card-bottom">
+                <div className="matches-card-info">
+                  <div className="matches-name-row">
+                    <p className="matches-card-name">{recipe.name}</p>
+                    {recipe.missing_ingredients?.length > 0 && (
+                      <span className="missing-badge">Missing Ingredient!</span>
+                    )}
+                  </div>
+                  <p className="matches-card-time">
+                    <span className="material-symbols-outlined">schedule</span>
+                    {recipe.cook_time} minutes
+                  </p>
                 </div>
-                <p className="matches-card-time">
-                  <span className="material-symbols-outlined">schedule</span>
-                  {recipe.time}
-                </p>
+                <button
+                  className={`matches-like ${saved.includes(recipe.id) ? 'liked' : ''}`}
+                  onClick={e => {
+                    e.stopPropagation();
+                    toggleSave(recipe.id);
+                  }}
+                >
+                  <span className="material-symbols-outlined">favorite</span>
+                </button>
               </div>
-              <button className={`matches-like ${recipe.liked ? 'liked' : ''}`}>
-                <span className="material-symbols-outlined">favorite</span>
-              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
     </div>
   );

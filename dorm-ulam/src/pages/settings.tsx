@@ -2,6 +2,8 @@ import './settings.css';
 
 interface Props {
   onBack: () => void;
+  onLogout: () => void;  // ← add this
+  user: any;             // ← add this too for real name/email
 }
 
 const settingsItems = [
@@ -12,23 +14,22 @@ const settingsItems = [
   { icon: 'info', label: 'About' },
 ];
 
-export default function Settings({ onBack }: Props) {
+export default function Settings({ onBack, onLogout, user }: Props) {
   return (
     <div className="settings-screen">
 
-      {/* Back button */}
       <button className="settings-back" onClick={onBack}>
         <span className="material-symbols-outlined">arrow_back</span>
       </button>
 
-      {/* SECTION 1: Profile header */}
       <div className="settings-top">
-        <div className="settings-avatar">J</div>
-        <h2 className="settings-name">Joshua Hong</h2>
-        <p className="settings-email">joshuahong17@email.com</p>
+        <div className="settings-avatar">
+          {user?.name?.charAt(0).toUpperCase() ?? 'J'}
+        </div>
+        <h2 className="settings-name">{user?.name ?? 'Joshua'}</h2>
+        <p className="settings-email">{user?.email ?? 'joshua@email.com'}</p>
       </div>
 
-      {/* SECTION 2: Settings list */}
       <div className="settings-card">
 
         <div className="settings-list">
@@ -47,7 +48,7 @@ export default function Settings({ onBack }: Props) {
           ))}
         </div>
 
-        <button className="settings-logout-btn">
+        <button className="settings-logout-btn" onClick={onLogout}>
           <span className="material-symbols-outlined">logout</span>
           Log Out
         </button>

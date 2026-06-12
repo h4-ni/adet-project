@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './cook.css';
 
 interface Props {
-  onGenerate: () => void;
+  onGenerate: (recipes: any[]) => void;
 }
 
 export default function Cook({ onGenerate }: Props) {
@@ -19,6 +19,16 @@ export default function Cook({ onGenerate }: Props) {
 
   function removeIngredient(name: string) {
     setIngredients(ingredients.filter(i => i !== name));
+  }
+
+    async function generateRecipes() {
+    const response = await fetch('http://127.0.0.1:8000/api/recipes/match', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ingredients }),
+    });
+    const data = await response.json();
+    onGenerate(data);  // pass matched recipes to App.tsx
   }
 
   return (
@@ -65,7 +75,7 @@ export default function Cook({ onGenerate }: Props) {
       </div>
 
       {/* SECTION 4: Generate button — now calls onGenerate */}
-      <button className="generate-btn" onClick={onGenerate}>
+      <button className="generate-btn" onClick={generateRecipes}>
         Generate Recipes
       </button>
 
