@@ -1,4 +1,5 @@
 import './login.css';
+import WhiteCard from '../components/whiteCard';
 
 interface Props {
   onLogin: () => void;
@@ -8,13 +9,16 @@ export default function Login({ onLogin }: Props) {
   return (
     <div className="login-screen">
 
+      {/* Only character in the top peach section */}
       <div className="login-top">
         <img src="/pink-hair.png" alt="character" className="login-character" />
-        <h1 className="login-title">Dorm Ulam</h1>
-        <p className="login-subtitle">Luto na, G na?</p>
       </div>
 
-      <div className="login-card">
+      <WhiteCard>
+
+        {/* Title moved inside the white card */}
+        <h1 className="login-title">Dorm Ulam</h1>
+        <p className="login-subtitle">Luto na, G na?</p>
 
         <div className="login-field">
           <label className="login-label">Email</label>
@@ -32,23 +36,14 @@ export default function Login({ onLogin }: Props) {
           </div>
         </div>
 
-        {/* clicking this goes to the app for now */}
         <button className="login-btn" onClick={onLogin}>Log In</button>
-
-        <div className="login-divider">
-          <span>or</span>
-        </div>
-
-        <button className="login-google-btn" onClick={onLogin}>
-          Continue with Google
-        </button>
 
         <p className="login-footer">
           Don't have an account?{' '}
           <span className="login-link">Sign up</span>
         </p>
 
-      </div>
+      </WhiteCard>
 
     </div>
   );

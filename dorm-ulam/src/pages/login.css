@@ -1,8 +1,9 @@
 .login-screen {
   background-color: #FDDEC9;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: flex;          /* ← required! */
+  flex-direction: column; /* ← required! */
+  overflow: hidden;    /* ← prevents horizontal scroll from the wider white card */
 }
 
 /* Top peach section */
@@ -10,39 +11,48 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 56px 24px 32px 24px;
+  padding: 20px 24px 0px 24px;
 }
 
 .login-character {
-  width: 140px;
-  height: 140px;
+  width: 300px;
+  height: 300px;
   object-fit: contain;
-  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;            /* sits on top of the white card */
+  margin-bottom: 20px;
+  margin-top: 20px;      /* pulls the card up behind the image */
 }
 
 .login-title {
   font-size: 28px;
   font-weight: 700;
-  margin: 0 0 4px 0;
+  margin: 16px 0 4px 0;
+  text-align: center;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .login-subtitle {
-  font-size: 14px;
-  color: #888;
-  margin: 0;
+  font-size: 18px;
+  color: #7e7e7e;
+  font-weight: 500;
+  margin: 0 0 24px 0;
+  text-align: center;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 35px;
 }
 
 /* White card */
-.login-card {
-  background: white;
-  border-radius: 32px 32px 0 0;
-  padding: 32px 24px 48px 24px;
-  flex: 1;
-}
+
 
 /* Fields */
 .login-field {
-  margin-bottom: 16px;
+  max-width: 320px;    /* limits the width */
+  margin: 0 auto 16px auto;  /* centers it + bottom spacing */
 }
 
 .login-label {
@@ -54,12 +64,14 @@
 }
 
 .login-input-row {
+  gap:10px; 
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: #F6F6F6;
-  border-radius: 14px;
-  padding: 12px 16px;
+  padding: 10px 20px;
+  border-radius: 16px;
+  border: 2px solid rgb(200, 200, 200); /* white at 60% opacity */
+  background-color:  rgba(255, 255, 255, 1);   /* white border at 100% opacity */
 }
 
 .login-field-icon {
@@ -83,54 +95,17 @@
   background-color: #E8681A;
   color: white;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
-  margin-top: 8px;
+  max-width: 320px;
+  margin: 70px auto 0 auto;
+  display: block;      /* needed for margin auto to work on a button */
 }
 
-/* Divider */
-.login-divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 20px 0;
-  color: #ccc;
-  font-size: 13px;
-}
 
-.login-divider::before,
-.login-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #eee;
-}
-
-/* Google button */
-.login-google-btn {
-  width: 100%;
-  padding: 14px;
-  background: white;
-  border: 2px solid #eee;
-  border-radius: 14px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: #333;
-}
-
-.google-icon {
-  width: 20px;
-  height: 20px;
-}
 
 /* Footer */
 .login-footer {
