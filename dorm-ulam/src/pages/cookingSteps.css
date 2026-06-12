@@ -1,0 +1,185 @@
+.cooking-screen {
+  background-color: #FDDEC9;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  padding: 56px 24px 100px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Progress row */
+.cooking-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cooking-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.cooking-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.cooking-step-count {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cooking-percent {
+  font-size: 13px;
+  color: #E8681A;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Progress bar */
+.cooking-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.cooking-progress-fill {
+  height: 100%;
+  background: #E8681A;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Instruction card */
+.cooking-instruction-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.cooking-step-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.cooking-step-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Timer card */
+.cooking-timer-card {
+  background: #EDE7FF;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cooking-timer-icon {
+  font-size: 32px;
+  color: #6C5CE7;
+}
+
+.cooking-timer-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6C5CE7;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.cooking-timer-display {
+  font-size: 48px;
+  font-weight: 800;
+  color: #333;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.cooking-timer-btn {
+  background: #6C5CE7;
+  color: white;
+  border: none;
+  border-radius: 99px;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  margin-top: 4px;
+}
+
+/* Equipment */
+.cooking-equipment {
+  background: white;
+  border-radius: 20px;
+  padding: 16px 20px;
+}
+
+.cooking-equipment-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.cooking-equipment-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cooking-equipment-tag {
+  background: #FDDEC9;
+  color: #E8681A;
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Navigation */
+.cooking-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.cooking-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #E8681A;
+  color: white;
+  border: none;
+  border-radius: 99px;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: opacity 0.2s;
+}
+
+.cooking-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
