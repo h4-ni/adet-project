@@ -1,10 +1,8 @@
 .white-card {
   background: white;
-  border-radius: 50% 50% 0 0 / 90px 90px 0 0;  /* ← ellipse curve */
-  width: 140%;                                    /* ← wider than screen */
-  margin-left: -20%;                              /* ← centers the wider card */
-  padding: 48px 20% 48px 20%;                    /* ← compensates for the extra width */
-  flex: 1;
-    position: relative;  /* ← add this */
-  z-index: 0;          /* ← lower than nav */
+  border-radius: 50% 50% 0 0 / 90px 90px 0 0;
+  width: 140%;
+  margin-left: -20%;
+  padding: 48px 20% 120px 20%;
+  min-height: fit-content;  /* ← only as tall as content needs */
 }
