@@ -1,33 +1,39 @@
-/* Discover.css */
-
 .discover-screen {
   background-color: #FDDEC9;
   min-height: 100vh;
-  padding: 56px 24px 100px 24px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-/* Hero food illustrations */
+/* Hero food illustrations — floats above white card */
 .discover-hero {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin: -50px 0;
+  margin-bottom: -130px;  /* pulls white card up */
+  position: relative;
+  z-index: 1;            /* keeps images above white card */
+  padding-top: 16px;
 }
 
 .hero-food-img {
-  width: 500px;
+  width: 370px;
   height: 300px;
   object-fit: contain;
+  margin-top: -60px;      /* adds space from top */
 }
 
 /* Trending title */
 .discover-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 16px;
-  margin-top: -80px;
-  margin-left: 20px;
+  padding-top: 16px;
+  text-align: left;
+  margin-left: 27px;
 }
 
 /* Recipe cards */
@@ -35,16 +41,16 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin:5px 27px 15px 27px;
 }
 
 .discover-card {
-  background: white;
+  background: #F6F6F6;
   border-radius: 16px;
   padding: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 15px 0 15px;
 }
 
 .discover-card-img {
@@ -78,7 +84,6 @@
   font-size: 14px;
 }
 
-/* Like button */
 .discover-like {
   background: none;
   border: none;
@@ -90,5 +95,5 @@
 }
 
 .discover-like.liked {
-  color: #E8681A;        /* orange when liked */
+  color: #E8681A;
 }
