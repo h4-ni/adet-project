@@ -27,8 +27,8 @@ export default function App() {
       <div className="app-wrapper">
         {activeTab === 'home' && <Home onSettings={() => setScreen('settings')} />}
         {activeTab === 'cook' && <Cook />}
-        {activeTab === 'discover' && <Discover />}
-        {activeTab === 'saved' && <Saved />}
+        {activeTab === 'discover' && <Discover onSettings={() => setScreen('settings')} />}
+        {activeTab === 'saved' && <Saved onSettings={() => setScreen('settings')} />}
       </div>
 
       {/* Outside app-wrapper so fixed positioning works */}
