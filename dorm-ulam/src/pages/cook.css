@@ -1,0 +1,128 @@
+.cook-screen {
+  background-color: #FDDEC9;
+  min-height: 100vh;
+  padding: 56px 24px 100px 24px;
+}
+
+.cook-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  padding-top: 28px;
+  line-height: 1.4;
+}
+
+.cook-highlight {
+  color: #E8681A;
+}
+
+/* Input row */
+.cook-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.6);    /* white at 60% opacity */
+  border: 2px solid rgba(255, 255, 255, 1); /* white border at 100% */
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 32px;
+  height: 55px;
+}
+
+.add-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #E8681A;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.cook-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+}
+
+/* Ingredients header */
+.ingredients-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.ingredients-label {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: #E8681A;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Ingredient list */
+.ingredients-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.ingredient-item {
+  background: white;
+  margin-right: 25px;
+  margin-left: 25px;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ingredient-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #C0C0C0;       /* light gray — minimalist */
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.delete-btn:hover {
+  color: #E8681A;       /* orange on hover */
+}
+
+/* Generate button */
+.generate-btn {
+  width: 100%;
+  padding: 18px;
+  background-color: #E8681A;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+}
