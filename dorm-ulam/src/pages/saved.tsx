@@ -15,13 +15,16 @@ const savedRecipes = [
   },
 ];
 
-export default function Saved() {
+interface Props {
+  onSettings: () => void;
+}
+
+export default function Saved({ onSettings }: Props) {
   return (
     <div className="saved-screen">
 
-      {/* SECTION 1: Header */}
       <header className="home-header">
-        <div className="avatar">J</div>
+        <div className="avatar" onClick={onSettings}>J</div>  {/* ← add onClick */}
         <div className="search">
           <span className="search-icon material-symbols-outlined">search</span>
           <input className="search-input" type="search" placeholder="Search" />
