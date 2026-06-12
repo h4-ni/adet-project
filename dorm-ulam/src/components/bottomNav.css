@@ -1,0 +1,49 @@
+/* components/BottomNav.css */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 32px;
+  width: 355px;
+  height: 69px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;  /* ← spreads items evenly */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px; /* Add some space from the bottom edge */
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 24px;
+  color: #888;
+}
+
+.nav-label {
+  font-size: 10px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Active state - orange circle behind icon */
+.nav-item.active {
+  color: #E8681A;
+}
+
+.nav-item.active .material-symbols-outlined {
+  background-color: #E8681A;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+}
