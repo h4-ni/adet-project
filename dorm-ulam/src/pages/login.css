@@ -1,0 +1,147 @@
+.login-screen {
+  background-color: #FDDEC9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top peach section */
+.login-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 24px 32px 24px;
+}
+
+.login-character {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.login-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+/* White card */
+.login-card {
+  background: white;
+  border-radius: 32px 32px 0 0;
+  padding: 32px 24px 48px 24px;
+  flex: 1;
+}
+
+/* Fields */
+.login-field {
+  margin-bottom: 16px;
+}
+
+.login-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.login-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #F6F6F6;
+  border-radius: 14px;
+  padding: 12px 16px;
+}
+
+.login-field-icon {
+  color: #aaa;
+  font-size: 20px;
+}
+
+.login-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Login button */
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #E8681A;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  margin-top: 8px;
+}
+
+/* Divider */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #ccc;
+  font-size: 13px;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+/* Google button */
+.login-google-btn {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  border: 2px solid #eee;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #333;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Footer */
+.login-footer {
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+  margin-top: 24px;
+}
+
+.login-link {
+  color: #E8681A;
+  font-weight: 600;
+  cursor: pointer;
+}
