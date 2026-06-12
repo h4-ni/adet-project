@@ -3,9 +3,11 @@ import WhiteCard from '../components/whiteCard';
 
 interface Props {
   onSettings: () => void;
+  onDiscover: () => void;
+  onSaved: () => void;
 }
 
-export default function Home({ onSettings }: Props) {
+export default function Home({ onSettings, onDiscover, onSaved }: Props) {
   return (
     <div className="home-screen">
 
@@ -18,12 +20,11 @@ export default function Home({ onSettings }: Props) {
         </div>
       </header>
 
-      {/* SECTION 2: Hero — character floats above the white card */}
+      {/* SECTION 2: Hero */}
       <section className="home-hero">
         <img src="/pink-hair.png" alt="character" className="hero-image" />
       </section>
 
-      {/* White card starts here — pulls up behind the character */}
       <WhiteCard>
 
         <h1 className="hero-name">Hi, Joshua!</h1>
@@ -45,7 +46,7 @@ export default function Home({ onSettings }: Props) {
         {/* SECTION 4: Menu */}
         <section className="home-menu">
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={onDiscover}>  {/* ← goes to Discover */}
             <div className="menu-icon">⭐</div>
             <div className="menu-text">
               <p className="menu-title">Trending Ulam</p>
@@ -54,7 +55,7 @@ export default function Home({ onSettings }: Props) {
             <span className="menu-arrow material-symbols-outlined">arrow_forward</span>
           </div>
 
-          <div className="menu-item">
+          <div className="menu-item" onClick={onSaved}>     {/* ← goes to Saved */}
             <div className="menu-icon">🧺</div>
             <div className="menu-text">
               <p className="menu-title">Your Favorites</p>

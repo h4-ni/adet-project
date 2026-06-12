@@ -1,5 +1,5 @@
 .cooking-screen {
-  background-color: #FDDEC9;
+  background: linear-gradient(180deg, #FFB693 0%, #F3F3F3 40%);
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
   padding: 56px 24px 100px 24px;

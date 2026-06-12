@@ -42,7 +42,10 @@ export default function App() {
   return (
     <>
       <div className="app-wrapper">
-        {activeTab === 'home' && <Home onSettings={() => setScreen('settings')} />}
+        {activeTab === 'home' && (<Home
+            onSettings={() => setScreen('settings')}
+            onDiscover={() => setActiveTab('discover')}
+            onSaved={() => setActiveTab('saved')}/>)}
         {activeTab === 'cook' && <Cook onGenerate={() => setScreen('matches')} />}
         {activeTab === 'discover' && <Discover onSettings={() => setScreen('settings')} />}
         {activeTab === 'saved' && <Saved onSettings={() => setScreen('settings')} />}
