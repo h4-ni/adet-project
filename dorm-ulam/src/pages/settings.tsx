@@ -6,7 +6,6 @@ interface Props {
 
 const settingsItems = [
   { icon: 'person', label: 'Edit Profile' },
-  { icon: 'notifications', label: 'Notifications' },
   { icon: 'lock', label: 'Change Password' },
   { icon: 'language', label: 'Language' },
   { icon: 'help', label: 'Help & Support' },
@@ -24,9 +23,9 @@ export default function Settings({ onBack }: Props) {
 
       {/* SECTION 1: Profile header */}
       <div className="settings-top">
-        <img src="/pink-hair.png" alt="avatar" className="settings-avatar" />
-        <h2 className="settings-name">Joshua</h2>
-        <p className="settings-email">joshua@email.com</p>
+        <div className="settings-avatar">J</div>
+        <h2 className="settings-name">Joshua Hong</h2>
+        <p className="settings-email">joshuahong17@email.com</p>
       </div>
 
       {/* SECTION 2: Settings list */}
