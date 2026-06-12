@@ -1,0 +1,189 @@
+.home-screen {
+  background-color: #FDDEC9;
+  min-height: 100vh;
+  padding: 16px;
+  padding-top: 28px;
+  font-family: 'Inter', sans-serif;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 360px;        /* limits how wide the header gets */
+  margin: 0 auto;          /* centers it horizontally */
+  padding-top: 32px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
+  background-color: #6C5CE7;   /* ← purple */
+  color: white; 
+  font-size:24px;                /* ← white J */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex-shrink: 0;               /* ← stops it from shrinking */
+}
+
+.search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.6); /* white at 60% opacity */
+  border: 2px solid rgba(255, 255, 255, 1);   /* white border at 100% opacity */
+}
+
+.search-icon {
+  color: #B2B2B2;
+  margin-right: 7px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* Hero */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;    /* needed for the overlap trick */
+  margin-top: 24px;
+}
+
+.hero-image {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;            /* sits on top of the white card */
+  margin-bottom: -20px;
+  margin-top: -35px;      /* pulls the card up behind the image */
+}
+
+.hero-name {
+  font-size: 26px;
+  font-weight: bold;
+  margin: -10px 0 4px 0;
+}
+
+.hero-subtitle {
+  color: #7e7e7e;
+  font-size: 16px;
+  font-weight: medium;
+  margin-top: -5px;
+  margin-bottom: 20px;
+}
+
+/* Ulam of the Day */
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 35px;
+  margin-bottom: 8px;
+}
+
+.featured-card {
+  background-color: #09DAF4;
+  border-radius: 27px;
+  padding: 15px 15px 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 27px 27px 27px;
+}
+
+.featured-name {
+  font-weight: bold;
+  font-size: 17px;
+  color: rgb(0, 0, 0);
+  margin: 0 0 4px 0;
+}
+
+.featured-time {
+  font-size: 13px;
+  color: #73797A;
+  margin: 0;
+  background-color: rgba(235, 235, 235, 0.6);  /* EBEBEB at 60% opacity */
+  border-radius: 12px;
+  padding: 5px 8px;
+  display: inline-flex;    /* ← shrinks to fit the content */
+  align-items: center;
+  gap: 4px;
+}
+
+.featured-likes {
+  font-size: 13px;
+  color: #006875;
+  margin: 10px 0 0 0;
+}
+
+.featured-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Menu rows */
+.home-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 5px 27px 15px 27px;
+
+}
+
+.menu-item {
+  background: white;
+  border-radius: 27px;
+  padding: 14px 16px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-icon {
+  font-size: 28px;
+}
+
+.menu-text {
+  flex: 1;
+}
+
+.menu-title {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0;
+}
+
+.menu-subtitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
+  margin-top: -4px;
+}
+
+.menu-arrow {
+  background-color: #CFBDFF;
+  color: #5C57E6;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 550;
+}
