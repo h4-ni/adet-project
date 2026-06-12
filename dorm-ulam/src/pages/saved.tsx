@@ -1,13 +1,18 @@
 import './saved.css';
 
-// Mock data — replace with real data later
 const savedRecipes = [
   {
     id: 1,
     name: 'Sizzling Hotdog',
     time: '8 minutes',
     image: '/sizzling-hotdog.jpg',
-  }
+  },
+  {
+    id: 2,
+    name: 'Hotdog Fried Rice',
+    time: '6 minutes',
+    image: '/hotdog-friedrice.jpg',
+  },
 ];
 
 export default function Saved() {
@@ -23,22 +28,18 @@ export default function Saved() {
         </div>
       </header>
 
-      {/* SECTION 2: Title */}
+      {/* SECTION 2: Title row */}
       <div className="saved-title-row">
         <h2 className="saved-title">Your Favorites</h2>
         <p className="saved-count">{savedRecipes.length} recipes</p>
       </div>
 
-      {/* SECTION 3: Saved cards */}
+      {/* SECTION 3: Cards */}
       {savedRecipes.length === 0 ? (
         <div className="saved-empty">
-          <span className="material-symbols-outlined saved-empty-icon">
-            favorite
-          </span>
+          <span className="material-symbols-outlined saved-empty-icon">favorite</span>
           <p className="saved-empty-text">No saved recipes yet!</p>
-          <p className="saved-empty-sub">
-            Heart a recipe to save it here.
-          </p>
+          <p className="saved-empty-sub">Heart a recipe to save it here.</p>
         </div>
       ) : (
         <div className="saved-list">

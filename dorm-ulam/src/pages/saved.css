@@ -3,15 +3,18 @@
 .saved-screen {
   background-color: #FDDEC9;
   min-height: 100vh;
-  padding: 56px 24px 100px 24px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding-bottom: 100px;
 }
 
-/* Title row */
 .saved-title-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 24px 0 16px 0;
+  padding: 24px 24px 16px 24px;
 }
 
 .saved-title {
@@ -60,6 +63,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin:5px 27px 15px 27px;
 }
 
 .saved-card {
