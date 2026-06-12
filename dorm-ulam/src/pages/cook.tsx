@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import './cook.css';
 
-export default function Cook() {
+interface Props {
+  onGenerate: () => void;
+}
+
+export default function Cook({ onGenerate }: Props) {
   const [ingredients, setIngredients] = useState<string[]>([
     'Palm Oil', 'Hotdog', 'Onion', 'Rice'
   ]);
   const [input, setInput] = useState('');
 
   function addIngredient() {
-    if (input.trim() === '') return;       // ignore empty input
+    if (input.trim() === '') return;
     setIngredients([...ingredients, input.trim()]);
-    setInput('');                          // clear the input after adding
+    setInput('');
   }
 
   function removeIngredient(name: string) {
@@ -60,8 +64,10 @@ export default function Cook() {
         ))}
       </div>
 
-      {/* SECTION 4: Generate button */}
-      <button className="generate-btn">Generate Recipes</button>
+      {/* SECTION 4: Generate button — now calls onGenerate */}
+      <button className="generate-btn" onClick={onGenerate}>
+        Generate Recipes
+      </button>
 
     </div>
   );
