@@ -8,9 +8,10 @@ import Settings from './pages/settings';
 import BottomNav from './components/bottomNav';
 import RecipeMatches from './pages/recipeMatches';
 import CookingSteps from './pages/cookingSteps';
+import Register from './pages/register';
 
 type Tab = 'home' | 'cook' | 'discover' | 'saved';
-type Screen = 'login' | 'app' | 'settings' | 'matches' | 'cooking';
+type Screen = 'login' | 'register' | 'app' | 'settings' | 'matches' | 'cooking';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('login');
@@ -41,7 +42,20 @@ export default function App() {
         setUser(user);
         setToken(token);
         setScreen('app');
-      }} />
+      }} onRegister={() => setScreen('register')} />
+    );
+  }
+
+    if (screen === 'register') {
+    return (
+      <Register
+        onRegister={(user, token) => {
+          setUser(user);
+          setToken(token);
+          setScreen('app');
+        }}
+        onBack={() => setScreen('login')}
+      />
     );
   }
 
@@ -84,10 +98,13 @@ export default function App() {
           />
         )}
         {activeTab === 'cook' && (
-          <Cook onGenerate={(recipes) => {
-            setMatchedRecipes(recipes);
-            setScreen('matches');
-          }} />
+          <Cook
+            user={user}
+            onGenerate={(recipes) => {
+              setMatchedRecipes(recipes);
+              setScreen('matches');
+            }}
+          />
         )}
         {activeTab === 'discover' && (
           <Discover

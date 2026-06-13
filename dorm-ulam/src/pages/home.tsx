@@ -30,8 +30,8 @@ export default function Home({ onSettings, onDiscover, onSaved, user }: Props) {
 
       <WhiteCard>
 
-        <h1 className="hero-name">Hi, {user?.name ?? 'User'}!</h1>
-        <p className="hero-subtitle">Luto na, G na?</p>
+        <h1 className="hero-name">Hi, Lab {user?.name?.split(' ')[0] ?? 'User'}!</h1>
+        <p className="hero-subtitle">Luto na tayo!</p>
 
         {/* SECTION 3: Ulam of the Day */}
         <section className="ulam-section">
