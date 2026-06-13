@@ -9,6 +9,10 @@
 }
 
 html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #FDDEC9;  /* ← match app background, no gray */
+  font-family: 'Inter', sans-serif;
   overflow: hidden;
   position: fixed;
   width: 100%;
@@ -16,11 +20,11 @@ html, body {
 }
 
 #root {
+  width: 100%;               /* ← full width on mobile */
   max-width: 390px;
   margin: 0 auto;
   height: 100vh;
-  overflow-y: auto;        /* ← scroll happens here instead */
+  overflow-y: auto;
   overflow-x: hidden;
   position: relative;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
