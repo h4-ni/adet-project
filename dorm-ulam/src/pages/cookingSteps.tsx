@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './CookingSteps.css';
+import './cookingSteps.css';
 
 const steps = [
   {
