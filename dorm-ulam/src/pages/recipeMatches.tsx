@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './recipeMatches.css';
+import API_URL from '../config';
 
 interface Props {
   recipes: any[];
@@ -15,11 +16,12 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
     const isSaved = saved.includes(recipeId);
     const method = isSaved ? 'DELETE' : 'POST';
 
-    await fetch(`http://127.0.0.1:8000/api/saved/${recipeId}`, {
+    await fetch(`${API_URL}/api/saved/${recipeId}`, {
       method,
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
       },
     });
 

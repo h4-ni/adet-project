@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './cook.css';
+import API_URL from '../config';
 
 interface Props {
   onGenerate: (recipes: any[]) => void;
@@ -23,9 +24,10 @@ export default function Cook({ onGenerate, user }: Props) {
   }
 
   async function generateRecipes() {
-    const response = await fetch('http://127.0.0.1:8000/api/recipes/match', {
+    const response = await fetch(`${API_URL}/api/recipes/match`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 
+      'ngrok-skip-browser-warning': 'true'},
       body: JSON.stringify({ ingredients }),
     });
     const data = await response.json();

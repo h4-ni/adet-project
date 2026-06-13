@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './register.css';
 import WhiteCard from '../components/whiteCard';
+import API_URL from '../config';
 
 interface Props {
   onRegister: (user: any, token: string) => void;
@@ -19,9 +20,9 @@ export default function Register({ onRegister, onBack }: Props) {
     setError('');
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/register', {
+      const response = await fetch(`${API_URL}/api/register`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
         body: JSON.stringify({ name, email, password }),
       });
 

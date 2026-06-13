@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './discover.css';
 import WhiteCard from '../components/whiteCard';
+import API_URL from '../config';
 
 interface Props {
   onSettings: () => void;
@@ -14,7 +15,7 @@ export default function Discover({ onSettings, token, user }: Props) {
   const [saved, setSaved] = useState<number[]>([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/recipes')
+    fetch(`${API_URL}/api/recipes`)
       .then(res => res.json())
       .then(data => {
         setRecipes(data);
@@ -26,11 +27,12 @@ export default function Discover({ onSettings, token, user }: Props) {
     const isSaved = saved.includes(recipeId);
     const method = isSaved ? 'DELETE' : 'POST';
 
-    await fetch(`http://127.0.0.1:8000/api/saved/${recipeId}`, {
+    await fetch(`${API_URL}/api/saved/${recipeId}`, {
       method,
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
       },
     });
 

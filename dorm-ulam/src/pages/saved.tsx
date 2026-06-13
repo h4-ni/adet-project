@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './saved.css';
+import API_URL from '../config';
 
 interface Props {
   onSettings: () => void;
@@ -12,9 +13,10 @@ export default function Saved({ onSettings, user, token }: Props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/saved', {
+    fetch(`${API_URL}/api/saved`, {
       headers: {
         'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': 'true',
       },
     })
       .then(res => res.json())
@@ -25,10 +27,11 @@ export default function Saved({ onSettings, user, token }: Props) {
   }, []);
 
   async function unsaveRecipe(recipeId: number) {
-    await fetch(`http://127.0.0.1:8000/api/saved/${recipeId}`, {
+    await fetch(`${API_URL}/api/saved/${recipeId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': 'true',
       },
     });
 
