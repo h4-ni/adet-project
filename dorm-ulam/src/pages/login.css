@@ -5,6 +5,7 @@
   display: flex;          /* ← required! */
   flex-direction: column; /* ← required! */
   overflow: hidden;    /* ← prevents horizontal scroll from the wider white card */
+  font-family: 'Inter', sans-serif;
 }
 
 /* Top peach section */
@@ -17,8 +18,8 @@
 }
 
 .login-character {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   position: relative;
   z-index: 1;            /* sits on top of the white card */

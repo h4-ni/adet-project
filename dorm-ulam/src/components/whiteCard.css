@@ -3,6 +3,7 @@
   border-radius: 50% 50% 0 0 / 90px 90px 0 0;
   width: 140%;
   margin-left: -20%;
-  padding: 48px 20% 120px 20%;
+  padding: 40px 20% 40px 20%;
   min-height: fit-content;  /* ← only as tall as content needs */
+  overflow-y: auto;             /* ← scroll inside card if needed */
 }
