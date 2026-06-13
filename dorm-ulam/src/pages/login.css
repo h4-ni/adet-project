@@ -1,6 +1,5 @@
 .login-screen {
   background-color: #FDDEC9;
-  min-height: 100vh;
   height: 100vh;
   display: flex;          /* ← required! */
   flex-direction: column; /* ← required! */
@@ -117,7 +116,7 @@
   font-size: 13px;
   color: #999;
   margin-top: 10px;
-  margin-bottom: -70px;
+  margin-bottom: 0;
 }
 
 .login-link {
