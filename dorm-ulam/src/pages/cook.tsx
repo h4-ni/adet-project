@@ -3,9 +3,10 @@ import './cook.css';
 
 interface Props {
   onGenerate: (recipes: any[]) => void;
+  user: any;   // ← add this
 }
 
-export default function Cook({ onGenerate }: Props) {
+export default function Cook({ onGenerate, user }: Props) {
   const [ingredients, setIngredients] = useState<string[]>([
     'Palm Oil', 'Hotdog', 'Onion', 'Rice'
   ]);
@@ -21,25 +22,36 @@ export default function Cook({ onGenerate }: Props) {
     setIngredients(ingredients.filter(i => i !== name));
   }
 
-    async function generateRecipes() {
+  async function generateRecipes() {
     const response = await fetch('http://127.0.0.1:8000/api/recipes/match', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ingredients }),
     });
     const data = await response.json();
-    onGenerate(data);  // pass matched recipes to App.tsx
+    onGenerate(data);
   }
 
   return (
     <div className="cook-screen">
 
-      {/* SECTION 1: Title */}
+      {/* SECTION 1: Header */}
+      <header className="home-header">
+        <div className="avatar">
+          {user?.name?.charAt(0).toUpperCase() ?? 'J'}
+        </div>
+        <div className="search">
+          <span className="search-icon material-symbols-outlined">search</span>
+          <input className="search-input" type="search" placeholder="Search" />
+        </div>
+      </header>
+
+      {/* SECTION 2: Title */}
       <h1 className="cook-title">
         What <span className="cook-highlight">ingredients</span> do you have?
       </h1>
 
-      {/* SECTION 2: Input */}
+      {/* SECTION 3: Input */}
       <div className="cook-input-row">
         <button className="add-btn" onClick={addIngredient}>+</button>
         <input
@@ -52,7 +64,7 @@ export default function Cook({ onGenerate }: Props) {
         />
       </div>
 
-      {/* SECTION 3: Ingredient list */}
+      {/* SECTION 4: Ingredient list */}
       <div className="ingredients-header">
         <p className="ingredients-label">Ingredients to Match</p>
         <button className="clear-btn" onClick={() => setIngredients([])}>
@@ -74,7 +86,7 @@ export default function Cook({ onGenerate }: Props) {
         ))}
       </div>
 
-      {/* SECTION 4: Generate button — now calls onGenerate */}
+      {/* SECTION 5: Generate button */}
       <button className="generate-btn" onClick={generateRecipes}>
         Generate Recipes
       </button>
