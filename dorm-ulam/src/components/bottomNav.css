@@ -1,21 +1,21 @@
-/* components/BottomNav.css */
 
 .bottom-nav {
   z-index: 999;
   position: fixed;
-  bottom: 16px;
+  bottom: 0px;              /* ← move to very bottom */
   left: 50%;
   transform: translateX(-50%);
-  background: white;
+  background: rgba(255, 255, 255, 0.85);  /* ← white at 85% opacity */
   border-radius: 32px;
-  width: 355px;
+  width: calc(100% - 48px);
+  max-width: 355px;
   height: 69px;
   padding: 0 16px;
   display: flex;
   align-items: center;
-  justify-content: space-around;  /* ← spreads items evenly */
+  justify-content: space-around;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px; /* Add some space from the bottom edge */
+  backdrop-filter: blur(8px);  /* ← frosted glass effect */
 }
 
 .nav-item {
