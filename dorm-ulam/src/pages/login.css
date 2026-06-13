@@ -4,7 +4,7 @@
   height: 100vh;
   display: flex;          /* ← required! */
   flex-direction: column; /* ← required! */
-  overflow-x: hidden;    /* ← prevents horizontal scroll from the wider white card */
+  overflow: hidden;    /* ← prevents horizontal scroll from the wider white card */
 }
 
 /* Top peach section */
