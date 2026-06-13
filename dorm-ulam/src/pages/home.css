@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   overflow-x: hidden;   /* ← add this */
-  padding-bottom: 120px;   /* ← add this */
+  padding-bottom: 90px;   /* ← add this */
 
 }
 

@@ -6,15 +6,17 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #F0F0F0;  /* gray outside the app */
+  background-color: #FDDEC9;
   font-family: 'Inter', sans-serif;
+  width: 100%;
+  height: 100%;
 }
 
 #root {
-  max-width: 390px;        /* iPhone 14 width */
-  margin: 0 auto;          /* centers it */
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);  /* subtle shadow on desktop */
+  position: relative;
 }
