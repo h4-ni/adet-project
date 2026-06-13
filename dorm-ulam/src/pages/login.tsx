@@ -4,9 +4,10 @@ import WhiteCard from '../components/whiteCard';
 
 interface Props {
   onLogin: (user: any, token: string) => void;
+  onRegister: () => void;
 }
 
-export default function Login({ onLogin }: Props) {
+export default function Login({ onLogin, onRegister }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -44,8 +45,8 @@ export default function Login({ onLogin }: Props) {
 
       <div className="login-top">
         <img src="/pink-hair.png" alt="character" className="login-character" />
-        <h1 className="login-title">NagkaonKaNaLabLab?</h1>
-        <p className="login-subtitle">Luto tayo, G?</p>
+        <h1 className="login-title">NagkaonKaNaLab</h1>
+        <p className="login-subtitle">'wag ka papagutom, okie?</p>
       </div>
 
       <WhiteCard>
@@ -93,7 +94,9 @@ export default function Login({ onLogin }: Props) {
 
         <p className="login-footer">
           Don't have an account?{' '}
-          <span className="login-link">Sign up</span>
+          <span className="login-link" onClick={onRegister}>
+            Sign up
+          </span>
         </p>
 
       </WhiteCard>

@@ -1,6 +1,7 @@
 .login-screen {
   background-color: #FDDEC9;
   min-height: 100vh;
+  height: 100vh;
   display: flex;          /* ← required! */
   flex-direction: column; /* ← required! */
   overflow-x: hidden;    /* ← prevents horizontal scroll from the wider white card */
@@ -11,7 +12,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 24px 0px 24px;
+  padding: 20px 24px 0 24px;
+  flex-shrink: 0;         /* ← prevents it from growing */
 }
 
 .login-character {
@@ -20,8 +22,8 @@
   object-fit: contain;
   position: relative;
   z-index: 1;            /* sits on top of the white card */
-  margin-bottom: 20px;
-  margin-top: 20px;      /* pulls the card up behind the image */
+  margin-bottom: -30px;
+  margin-top: 30px;      /* pulls the card up behind the image */
 }
 
 .login-title {
@@ -44,6 +46,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 35px;
+  margin-top: -5px;
 }
 
 /* White card */
@@ -101,7 +104,7 @@
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   max-width: 320px;
-  margin: 70px auto 0 auto;
+  margin: 60px auto 0 auto;
   display: block;      /* needed for margin auto to work on a button */
 }
 
@@ -112,7 +115,8 @@
   text-align: center;
   font-size: 13px;
   color: #999;
-  margin-top: 24px;
+  margin-top: 15px;
+  margin-bottom: -60px;
 }
 
 .login-link {
