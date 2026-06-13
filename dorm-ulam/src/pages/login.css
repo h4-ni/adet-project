@@ -24,7 +24,7 @@
   position: relative;
   z-index: 1;            /* sits on top of the white card */
   margin-bottom: -30px;
-  margin-top: 20px;      /* pulls the card up behind the image */
+  margin-top: 10px;      /* pulls the card up behind the image */
 }
 
 .login-title {
@@ -105,7 +105,7 @@
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   max-width: 320px;
-  margin: 60px auto 0 auto;
+  margin: 30px auto 0 auto;
   display: block;      /* needed for margin auto to work on a button */
 }
 
@@ -116,7 +116,7 @@
   text-align: center;
   font-size: 13px;
   color: #999;
-  margin-top: 15px;
+  margin-top: 10px;
   margin-bottom: -70px;
 }
 
