@@ -4,6 +4,5 @@
   width: 140%;
   margin-left: -20%;
   padding: 40px 20% 40px 20%;
-  min-height: fit-content;  /* ← only as tall as content needs */
-  overflow-y: auto;             /* ← scroll inside card if needed */
+  min-height: fit-content;  /* ← only as tall as content needs */       /* ← scroll inside card if needed */
 }

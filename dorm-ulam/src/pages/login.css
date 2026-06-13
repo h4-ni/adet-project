@@ -18,13 +18,13 @@
 }
 
 .login-character {
-  width: 200px;
-  height: 200px;
+  width: 270px;
+  height: 270px;
   object-fit: contain;
   position: relative;
   z-index: 1;            /* sits on top of the white card */
   margin-bottom: -30px;
-  margin-top: 30px;      /* pulls the card up behind the image */
+  margin-top: 20px;      /* pulls the card up behind the image */
 }
 
 .login-title {
@@ -117,7 +117,7 @@
   font-size: 13px;
   color: #999;
   margin-top: 15px;
-  margin-bottom: -60px;
+  margin-bottom: -70px;
 }
 
 .login-link {
