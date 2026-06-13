@@ -12,16 +12,17 @@
   flex-direction: column;
   align-items: center;
   padding: 20px 24px 0px 24px;
+  flex-shrink: 0; 
 }
 
 .register-character {
-  width: 300px;
-  height: 300px;
+  width: 230px;
+  height: 230px;
   object-fit: contain;
   position: relative;
   z-index: 1;            /* sits on top of the white card */
   margin-bottom: -30px;
-  margin-top: 20px;      /* pulls the card up behind the image */
+  margin-top: -30px;      /* pulls the card up behind the image */
 }
 
 .register-title {
@@ -37,7 +38,7 @@
   font-weight: 500;
   margin-top: -5px;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .register-error {
@@ -102,7 +103,7 @@
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   max-width: 320px;
-  margin: 40px auto 0 auto;
+  margin: 25px auto 0 auto;
   display: block;
 }
 
@@ -111,7 +112,7 @@
   font-size: 13px;
   color: #999;
   margin-top: 24px;
-  margin-bottom: -80px;
+  margin-bottom: 0;
 }
 
 .register-link {
