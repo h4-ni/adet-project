@@ -7,3 +7,20 @@
   --color-brand-purple: #8A5CFF;
   --color-brand-dark: #1A1C1E;
 }
+
+html, body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  max-width: 390px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow-y: auto;        /* ← scroll happens here instead */
+  overflow-x: hidden;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
