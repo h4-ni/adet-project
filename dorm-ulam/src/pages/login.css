@@ -24,7 +24,7 @@
   position: relative;
   z-index: 1;            /* sits on top of the white card */
   margin-bottom: -30px;
-  margin-top: 10px;      /* pulls the card up behind the image */
+  margin-top: -10px;      /* pulls the card up behind the image */
 }
 
 .login-title {
