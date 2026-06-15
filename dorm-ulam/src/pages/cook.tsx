@@ -37,7 +37,6 @@ interface Props {
     body: JSON.stringify({ ingredients }),
   });
   const data = await response.json();
-  localStorage.removeItem('ingredients');  // ← clear after generating
   onGenerate(data);
 }
 
