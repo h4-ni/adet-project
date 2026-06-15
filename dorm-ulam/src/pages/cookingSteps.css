@@ -213,6 +213,7 @@
   color: #888;
   margin: 0;
   line-height: 1.5;
+  margin-bottom: 16px;
 }
 
 .congrats-highlight {
@@ -295,7 +296,7 @@
   font-weight: 600;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
-  margin-top: auto;
+  margin-top: 16px;
 }
 
 .cooking-timer-optional {
