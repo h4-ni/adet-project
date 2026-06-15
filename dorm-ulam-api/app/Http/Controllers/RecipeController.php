@@ -14,34 +14,51 @@ class RecipeController extends Controller
         return response()->json($recipes);
     }
 
-   public function match(Request $request)
-{
-    $userIngredients = array_map('strtolower', $request->ingredients);
+    public function match(Request $request)
+    {
+        $userIngredients = array_map('strtolower', $request->ingredients);
 
-    $recipes = Recipe::all()->map(function ($recipe) use ($userIngredients) {
-        $recipeIngredients = array_map('strtolower', $recipe->ingredients);
+        $recipes = Recipe::all()->map(function ($recipe) use ($userIngredients) {
+            $recipeIngredients = array_map('strtolower', $recipe->ingredients);
 
-        $matched = array_intersect($userIngredients, $recipeIngredients);
-        $missing = array_diff($recipeIngredients, $userIngredients);
+            // partial match — checks if user ingredient is contained in recipe ingredient
+            $matched = array_filter($recipeIngredients, function($recipeIngredient) use ($userIngredients) {
+                foreach ($userIngredients as $userIngredient) {
+                    if (str_contains($recipeIngredient, $userIngredient) || 
+                        str_contains($userIngredient, $recipeIngredient)) {
+                        return true;
+                    }
+                }
+                return false;
+            });
 
-        return [
-            'id' => $recipe->id,
-            'name' => $recipe->name,
-            'image' => $recipe->image,
-            'cook_time' => $recipe->cook_time,
-            'ingredients' => $recipe->ingredients,
-            'equipment' => $recipe->equipment,
-            'instructions' => $recipe->instructions,  // ← add this!
-            'likes' => $recipe->likes,
-            'matched_count' => count($matched),
-            'missing_ingredients' => array_values($missing),
-        ];
-    })
-    ->filter(fn($r) => $r['matched_count'] > 0)
-    ->sortByDesc('matched_count')
-    ->values();
+            $missing = array_filter($recipeIngredients, function($recipeIngredient) use ($userIngredients) {
+                foreach ($userIngredients as $userIngredient) {
+                    if (str_contains($recipeIngredient, $userIngredient) || 
+                        str_contains($userIngredient, $recipeIngredient)) {
+                        return false;
+                    }
+                }
+                return true;
+            });
 
-    return response()->json($recipes);
+            return [
+                'id' => $recipe->id,
+                'name' => $recipe->name,
+                'image' => $recipe->image,
+                'cook_time' => $recipe->cook_time,
+                'ingredients' => $recipe->ingredients,
+                'equipment' => $recipe->equipment,
+                'instructions' => $recipe->instructions,
+                'likes' => $recipe->likes,
+                'matched_count' => count($matched),
+                'missing_ingredients' => array_values($missing),
+            ];
+        })
+        ->filter(fn($r) => $r['matched_count'] > 0)
+        ->sortByDesc('matched_count')
+        ->values();
 
+        return response()->json($recipes);
     }
 }
