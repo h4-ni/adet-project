@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import './cookingSteps.css';
+import API_URL from '../config';
 
 interface Props {
   recipe: any;
+  token: string;   // ← add this
   onBack: () => void;
+  onDone: () => void;
 }
 
-export default function CookingSteps({ recipe, onBack }: Props) {
-  // parse instructions if it comes as a string
+export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
   const steps = typeof recipe?.instructions === 'string'
     ? JSON.parse(recipe.instructions)
     : recipe?.instructions ?? [];
@@ -15,6 +17,8 @@ export default function CookingSteps({ recipe, onBack }: Props) {
   const [currentStep, setCurrentStep] = useState(0);
   const [timeLeft, setTimeLeft] = useState(steps[0]?.timerSeconds ?? 0);
   const [running, setRunning] = useState(false);
+  const [done, setDone] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const step = steps[currentStep];
   const progress = steps.length > 0 ? ((currentStep + 1) / steps.length) * 100 : 0;
@@ -36,8 +40,25 @@ export default function CookingSteps({ recipe, onBack }: Props) {
     return () => clearInterval(interval);
   }, [running, timeLeft]);
 
+    async function toggleSave() {
+    const method = saved ? 'DELETE' : 'POST';
+    await fetch(`${API_URL}/api/saved/${recipe.id}`, {
+      method,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
+    });
+    setSaved(!saved);
+  }
+
   function goNext() {
-    if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1);
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      setDone(true);  // ← show congratulations
+    }
   }
 
   function goPrev() {
@@ -46,6 +67,55 @@ export default function CookingSteps({ recipe, onBack }: Props) {
 
   const mins = String(Math.floor(timeLeft / 60)).padStart(2, '0');
   const secs = String(timeLeft % 60).padStart(2, '0');
+
+  // ← Congratulations screen
+  if (done) {
+    return (
+      <div className="cooking-screen">
+        <div className="congrats-container">
+
+          {/* Congrats message */}
+          <div className="congrats-top">
+            <p className="congrats-emoji">🎉</p>
+            <h1 className="congrats-title">Luto na!</h1>
+            <p className="congrats-subtitle">
+              You just cooked <span className="congrats-highlight">{recipe.name}</span>. Enjoy your meal, lods!
+            </p>
+          </div>
+
+          {/* Recipe card */}
+          <div className="congrats-card">
+            <img
+              src={`/${recipe.image}`}
+              alt={recipe.name}
+              className="congrats-img"
+            />
+            <div className="congrats-card-bottom">
+              <div className="congrats-card-info">
+                <p className="congrats-card-name">{recipe.name}</p>
+                <p className="congrats-card-time">
+                  <span className="material-symbols-outlined">schedule</span>
+                  {recipe.cook_time} minutes
+                </p>
+              </div>
+              <button
+                className={`congrats-like ${saved ? 'liked' : ''}`}
+                onClick={toggleSave}
+              >
+                <span className="material-symbols-outlined">favorite</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Done button */}
+          <button className="congrats-btn" onClick={onDone}>
+            Back to Home
+          </button>
+
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="cooking-screen">
@@ -96,8 +166,8 @@ export default function CookingSteps({ recipe, onBack }: Props) {
           <span className="material-symbols-outlined">arrow_back</span>
           Previous
         </button>
-        <button className="cooking-nav-btn" onClick={goNext} disabled={currentStep === steps.length - 1}>
-          Next
+        <button className="cooking-nav-btn" onClick={goNext}>
+          {currentStep === steps.length - 1 ? 'Finish' : 'Next'}
           <span className="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
