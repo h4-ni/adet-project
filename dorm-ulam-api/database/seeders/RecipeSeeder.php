@@ -169,7 +169,7 @@ class RecipeSeeder extends Seeder
 
         Recipe::create([
             'name' => 'Enoki Pastil',
-            'image' => 'enoki-pastil.jpg',
+            'image' => 'Enoki-pastil.jpg',
             'cook_time' => 20,
             'instructions' => json_encode([
                 ['title' => 'Step 1: The Prep', 'instruction' => 'Slice onion and garlic. Separate each stem of the enoki and cut the end roots.', 'timerSeconds' => 60, 'equipment' => ['Pan or Rice Cooker']],
@@ -285,7 +285,7 @@ class RecipeSeeder extends Seeder
 
         Recipe::create([
             'name' => 'Cheesy Scrambled Eggs',
-            'image' => 'cheesy-scrambled-eggs.jpg',
+            'image' => 'cheesy-scrambled-egg.jpg',
             'cook_time' => 10,
             'instructions' => json_encode([
                 ['title' => 'Step 1: Crack and season', 'instruction' => 'Crack eggs into a bowl. Add salt, pepper, and a splash of milk. Whisk until fully combined.', 'timerSeconds' => 60, 'equipment' => ['Bowl', 'Fork']],
@@ -301,7 +301,7 @@ class RecipeSeeder extends Seeder
 
         Recipe::create([
             'name' => 'Cornsilog',
-            'image' => 'cornsilog.png',
+            'image' => 'corn-silog.jpg',
             'cook_time' => 10,
             'instructions' => json_encode([
                 ['title' => 'Step 1: Saute garlic and onion', 'instruction' => 'Heat oil in a pan. Saute garlic until golden then add onion and cook until softened.', 'timerSeconds' => 60, 'equipment' => ['Pan', 'Spatula']],
