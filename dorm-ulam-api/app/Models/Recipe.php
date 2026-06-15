@@ -19,5 +19,6 @@ class Recipe extends Model
     protected $casts = [
         'ingredients' => 'array',  // converts JSON to array automatically
         'equipment' => 'array',
+        'instructions' => 'array',
     ];
 }

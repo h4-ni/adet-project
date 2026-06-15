@@ -19,6 +19,7 @@ export default function App() {
   const [matchedRecipes, setMatchedRecipes] = useState<any[]>([]);  // ← moved inside
   const [user, setUser] = useState<any>(null);
   const [token, setToken] = useState<string>('');
+  const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
 
   async function handleLogout() {
   // call the API to invalidate the token
@@ -75,16 +76,22 @@ export default function App() {
       recipes={matchedRecipes}
       token={token}
       onBack={() => setScreen('app')}
-      onSelectRecipe={() => setScreen('cooking')}
+      onSelectRecipe={(recipe) => {
+        setSelectedRecipe(recipe);
+        setScreen('cooking');
+      }}
     />
   );
 }
 
   if (screen === 'cooking') {
-    return (
-      <CookingSteps onBack={() => setScreen('matches')} />
-    );
-  }
+  return (
+    <CookingSteps
+      recipe={selectedRecipe}
+      onBack={() => setScreen('matches')}
+    />
+  );
+}
 
   return (
     <>

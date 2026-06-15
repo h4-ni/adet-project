@@ -6,7 +6,7 @@ interface Props {
   recipes: any[];
   token: string;
   onBack: () => void;
-  onSelectRecipe: () => void;
+  onSelectRecipe: (recipe: any) => void;  // ← passes recipe
 }
 
 export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }: Props) {
@@ -57,7 +57,7 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
       ) : (
         <div className="matches-list">
           {recipes.map(recipe => (
-            <div key={recipe.id} className="matches-card" onClick={onSelectRecipe}>
+            <div key={recipe.id} className="matches-card" onClick={() => onSelectRecipe(recipe)}>
               <img
                 src={`/${recipe.image}`}
                 alt={recipe.name}
