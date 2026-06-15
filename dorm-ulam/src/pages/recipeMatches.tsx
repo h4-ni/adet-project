@@ -6,7 +6,7 @@ interface Props {
   recipes: any[];
   token: string;
   onBack: () => void;
-  onSelectRecipe: (recipe: any) => void;  // ← passes recipe
+  onSelectRecipe: (recipe: any) => void;
 }
 
 export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }: Props) {
@@ -56,38 +56,46 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
         </div>
       ) : (
         <div className="matches-list">
-          {recipes.map(recipe => (
-            <div key={recipe.id} className="matches-card" onClick={() => onSelectRecipe(recipe)}>
-              <img
-                src={`/${recipe.image}`}
-                alt={recipe.name}
-                className="matches-card-img"
-              />
-              <div className="matches-card-bottom">
-                <div className="matches-card-info">
-                  <div className="matches-name-row">
-                    <p className="matches-card-name">{recipe.name}</p>
-                    {recipe.missing_ingredients?.length > 0 && (
-                      <span className="missing-badge">Missing Ingredient!</span>
-                    )}
+          {recipes.map(recipe => {
+            const steps = typeof recipe?.instructions === 'string'
+              ? JSON.parse(recipe.instructions)
+              : recipe?.instructions ?? [];
+            const totalSeconds = steps.reduce((sum: number, s: any) => sum + (s.timerSeconds ?? 0), 0);
+            const totalMins = Math.ceil(totalSeconds / 60);
+
+            return (
+              <div key={recipe.id} className="matches-card" onClick={() => onSelectRecipe(recipe)}>
+                <img
+                  src={`/${recipe.image}`}
+                  alt={recipe.name}
+                  className="matches-card-img"
+                />
+                <div className="matches-card-bottom">
+                  <div className="matches-card-info">
+                    <div className="matches-name-row">
+                      <p className="matches-card-name">{recipe.name}</p>
+                      {recipe.missing_ingredients?.length > 0 && (
+                        <span className="missing-badge">Missing Ingredient!</span>
+                      )}
+                    </div>
+                    <p className="matches-card-time">
+                      <span className="material-symbols-outlined">schedule</span>
+                      {totalMins} minutes
+                    </p>
                   </div>
-                  <p className="matches-card-time">
-                    <span className="material-symbols-outlined">schedule</span>
-                    {recipe.cook_time} minutes
-                  </p>
+                  <button
+                    className={`matches-like ${saved.includes(recipe.id) ? 'liked' : ''}`}
+                    onClick={e => {
+                      e.stopPropagation();
+                      toggleSave(recipe.id);
+                    }}
+                  >
+                    <span className="material-symbols-outlined">favorite</span>
+                  </button>
                 </div>
-                <button
-                  className={`matches-like ${saved.includes(recipe.id) ? 'liked' : ''}`}
-                  onClick={e => {
-                    e.stopPropagation();
-                    toggleSave(recipe.id);
-                  }}
-                >
-                  <span className="material-symbols-outlined">favorite</span>
-                </button>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
