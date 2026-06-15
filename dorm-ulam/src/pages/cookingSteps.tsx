@@ -4,7 +4,7 @@ import API_URL from '../config';
 
 interface Props {
   recipe: any;
-  token: string;   // ← add this
+  token: string;
   onBack: () => void;
   onDone: () => void;
 }
@@ -23,6 +23,10 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
   const step = steps[currentStep];
   const progress = steps.length > 0 ? ((currentStep + 1) / steps.length) * 100 : 0;
 
+  // calculate total time from all steps
+  const totalSeconds = steps.reduce((sum: number, s: any) => sum + (s.timerSeconds ?? 0), 0);
+  const totalMins = Math.ceil(totalSeconds / 60);
+
   useEffect(() => {
     setTimeLeft(step?.timerSeconds ?? 0);
     setRunning(false);
@@ -40,7 +44,7 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
     return () => clearInterval(interval);
   }, [running, timeLeft]);
 
-    async function toggleSave() {
+  async function toggleSave() {
     const method = saved ? 'DELETE' : 'POST';
     await fetch(`${API_URL}/api/saved/${recipe.id}`, {
       method,
@@ -57,7 +61,7 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      setDone(true);  // ← show congratulations
+      setDone(true);
     }
   }
 
@@ -68,13 +72,12 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
   const mins = String(Math.floor(timeLeft / 60)).padStart(2, '0');
   const secs = String(timeLeft % 60).padStart(2, '0');
 
-  // ← Congratulations screen
+  // Congratulations screen
   if (done) {
     return (
       <div className="cooking-screen">
         <div className="congrats-container">
 
-          {/* Congrats message */}
           <div className="congrats-top">
             <p className="congrats-emoji">🎉</p>
             <h1 className="congrats-title">Luto na!</h1>
@@ -83,7 +86,6 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
             </p>
           </div>
 
-          {/* Recipe card */}
           <div className="congrats-card">
             <img
               src={`/${recipe.image}`}
@@ -95,7 +97,7 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
                 <p className="congrats-card-name">{recipe.name}</p>
                 <p className="congrats-card-time">
                   <span className="material-symbols-outlined">schedule</span>
-                  {recipe.cook_time} minutes
+                  {totalMins} minutes
                 </p>
               </div>
               <button
@@ -107,7 +109,6 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
             </div>
           </div>
 
-          {/* Done button */}
           <button className="congrats-btn" onClick={onDone}>
             Back to Home
           </button>
@@ -144,7 +145,9 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
       {step?.timerSeconds > 0 && (
         <div className="cooking-timer-card">
           <span className="material-symbols-outlined cooking-timer-icon">timer</span>
-          <p className="cooking-timer-label">STEP TIMER</p>
+          <p className="cooking-timer-label">
+            STEP TIMER <span className="cooking-timer-optional">(Optional)</span>
+          </p>
           <p className="cooking-timer-display">{mins}:{secs}</p>
           <button className="cooking-timer-btn" onClick={() => setRunning(!running)}>
             {running ? 'Pause' : 'Start Timer'}
