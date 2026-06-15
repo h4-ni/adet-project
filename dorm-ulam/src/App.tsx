@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Login from './pages/login';
 import Home from './pages/home';
 import Cook from './pages/cook';
@@ -9,6 +9,7 @@ import BottomNav from './components/bottomNav';
 import RecipeMatches from './pages/recipeMatches';
 import CookingSteps from './pages/cookingSteps';
 import Register from './pages/register';
+import API_URL from './config';
 
 type Tab = 'home' | 'cook' | 'discover' | 'saved';
 type Screen = 'login' | 'register' | 'app' | 'settings' | 'matches' | 'cooking';
@@ -16,45 +17,62 @@ type Screen = 'login' | 'register' | 'app' | 'settings' | 'matches' | 'cooking';
 export default function App() {
   const [screen, setScreen] = useState<Screen>('login');
   const [activeTab, setActiveTab] = useState<Tab>('home');
-  const [matchedRecipes, setMatchedRecipes] = useState<any[]>([]);  // ← moved inside
-  const [user, setUser] = useState<any>(null);
-  const [token, setToken] = useState<string>('');
+  const [matchedRecipes, setMatchedRecipes] = useState<any[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
 
-  async function handleLogout() {
-  // call the API to invalidate the token
-  await fetch('http://127.0.0.1:8000/api/logout', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
+  // ← load from localStorage on first render
+  const [user, setUser] = useState<any>(() => {
+    const saved = localStorage.getItem('user');
+    return saved ? JSON.parse(saved) : null;
   });
 
-    // clear local state
+  const [token, setToken] = useState<string>(() => {
+    return localStorage.getItem('token') ?? '';
+  });
+
+  // ← if token exists skip login
+  useEffect(() => {
+    if (token) setScreen('app');
+  }, []);
+
+  function handleLogin(user: any, token: string) {
+    setUser(user);
+    setToken(token);
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+    setScreen('app');
+  }
+
+  async function handleLogout() {
+    await fetch(`${API_URL}/api/logout`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': 'true',
+      },
+    });
+
     setUser(null);
     setToken('');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setScreen('login');
     setActiveTab('home');
   }
 
   if (screen === 'login') {
     return (
-      <Login onLogin={(user, token) => {
-        setUser(user);
-        setToken(token);
-        setScreen('app');
-      }} onRegister={() => setScreen('register')} />
+      <Login
+        onLogin={handleLogin}
+        onRegister={() => setScreen('register')}
+      />
     );
   }
 
-    if (screen === 'register') {
+  if (screen === 'register') {
     return (
       <Register
-        onRegister={(user, token) => {
-          setUser(user);
-          setToken(token);
-          setScreen('app');
-        }}
+        onRegister={handleLogin}
         onBack={() => setScreen('login')}
       />
     );
@@ -71,27 +89,27 @@ export default function App() {
   }
 
   if (screen === 'matches') {
-  return (
-    <RecipeMatches
-      recipes={matchedRecipes}
-      token={token}
-      onBack={() => setScreen('app')}
-      onSelectRecipe={(recipe) => {
-        setSelectedRecipe(recipe);
-        setScreen('cooking');
-      }}
-    />
-  );
-}
+    return (
+      <RecipeMatches
+        recipes={matchedRecipes}
+        token={token}
+        onBack={() => setScreen('app')}
+        onSelectRecipe={(recipe) => {
+          setSelectedRecipe(recipe);
+          setScreen('cooking');
+        }}
+      />
+    );
+  }
 
   if (screen === 'cooking') {
-  return (
-    <CookingSteps
-      recipe={selectedRecipe}
-      onBack={() => setScreen('matches')}
-    />
-  );
-}
+    return (
+      <CookingSteps
+        recipe={selectedRecipe}
+        onBack={() => setScreen('matches')}
+      />
+    );
+  }
 
   return (
     <>
@@ -116,7 +134,7 @@ export default function App() {
             user={user}
             onSettings={() => setScreen('settings')}
           />
-        )}        
+        )}
         {activeTab === 'saved' && (
           <Saved
             user={user}
