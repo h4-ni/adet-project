@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './cookingSteps.css';
+import './CookingSteps.css';
 
 interface Props {
   recipe: any;
@@ -7,13 +7,17 @@ interface Props {
 }
 
 export default function CookingSteps({ recipe, onBack }: Props) {
-  const steps = recipe?.instructions ?? [];
+  // parse instructions if it comes as a string
+  const steps = typeof recipe?.instructions === 'string'
+    ? JSON.parse(recipe.instructions)
+    : recipe?.instructions ?? [];
+
   const [currentStep, setCurrentStep] = useState(0);
   const [timeLeft, setTimeLeft] = useState(steps[0]?.timerSeconds ?? 0);
   const [running, setRunning] = useState(false);
 
   const step = steps[currentStep];
-  const progress = ((currentStep + 1) / steps.length) * 100;
+  const progress = steps.length > 0 ? ((currentStep + 1) / steps.length) * 100 : 0;
 
   useEffect(() => {
     setTimeLeft(step?.timerSeconds ?? 0);
