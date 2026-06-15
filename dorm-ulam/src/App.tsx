@@ -105,13 +105,10 @@ export default function App() {
           />
         )}
         {activeTab === 'cook' && (
-          <Cook
-            user={user}
-            onGenerate={(recipes) => {
-              setMatchedRecipes(recipes);
-              setScreen('matches');
-            }}
-          />
+          <Cook onGenerate={(recipes) => {
+            setMatchedRecipes(recipes);
+            setScreen('matches');
+          }} />
         )}
         {activeTab === 'discover' && (
           <Discover

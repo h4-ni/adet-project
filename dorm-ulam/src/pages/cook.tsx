@@ -4,10 +4,9 @@ import API_URL from '../config';
 
 interface Props {
   onGenerate: (recipes: any[]) => void;
-  user: any;   // ← add this
 }
 
-export default function Cook({ onGenerate, user }: Props) {
+export default function Cook({ onGenerate }: Props) {
   const [ingredients, setIngredients] = useState<string[]>([
     'Palm Oil', 'Hotdog', 'Onion', 'Rice'
   ]);
@@ -38,20 +37,11 @@ export default function Cook({ onGenerate, user }: Props) {
     <div className="cook-screen">
 
       {/* SECTION 1: Header */}
-      <header className="home-header">
-        <div className="avatar">
-          {user?.name?.charAt(0).toUpperCase() ?? 'J'}
-        </div>
-        <div className="search">
-          <span className="search-icon material-symbols-outlined">search</span>
-          <input className="search-input" type="search" placeholder="Search" />
-        </div>
-      </header>
-
-      {/* SECTION 2: Title */}
-      <h1 className="cook-title">
+        <h1 className="cook-title">
         What <span className="cook-highlight">ingredients</span> do you have?
       </h1>
+      
+     
 
       {/* SECTION 3: Input */}
       <div className="cook-input-row">
