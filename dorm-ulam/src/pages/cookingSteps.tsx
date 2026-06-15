@@ -82,7 +82,8 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
             <p className="congrats-emoji">🎉</p>
             <h1 className="congrats-title">Luto na!</h1>
             <p className="congrats-subtitle">
-              You just cooked <span className="congrats-highlight">{recipe.name}</span>. Eatwell, Lab!
+              You just cooked <span className="congrats-highlight">{recipe.name}</span>. 
+              Eatwell, Lab!
             </p>
           </div>
 
