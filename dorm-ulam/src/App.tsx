@@ -106,7 +106,12 @@ export default function App() {
     return (
       <CookingSteps
         recipe={selectedRecipe}
+        token={token}
         onBack={() => setScreen('matches')}
+        onDone={() => {
+          setScreen('app');
+          setActiveTab('home');
+        }}
       />
     );
   }
