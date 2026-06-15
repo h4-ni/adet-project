@@ -6,32 +6,40 @@ interface Props {
   onGenerate: (recipes: any[]) => void;
 }
 
-export default function Cook({ onGenerate }: Props) {
-  const [ingredients, setIngredients] = useState<string[]>([
-    'Palm Oil', 'Hotdog', 'Onion', 'Rice'
-  ]);
-  const [input, setInput] = useState('');
+  export default function Cook({ onGenerate }: Props) {
+    const [ingredients, setIngredients] = useState<string[]>(() => {
+    const saved = localStorage.getItem('ingredients');
+    return saved ? JSON.parse(saved) : [];
+  });
+    const [input, setInput] = useState('');
 
-  function addIngredient() {
+    function addIngredient() {
     if (input.trim() === '') return;
-    setIngredients([...ingredients, input.trim()]);
+    const updated = [...ingredients, input.trim()];
+    setIngredients(updated);
+    localStorage.setItem('ingredients', JSON.stringify(updated));
     setInput('');
   }
 
   function removeIngredient(name: string) {
-    setIngredients(ingredients.filter(i => i !== name));
+    const updated = ingredients.filter(i => i !== name);
+    setIngredients(updated);
+    localStorage.setItem('ingredients', JSON.stringify(updated));
   }
 
   async function generateRecipes() {
-    const response = await fetch(`${API_URL}/api/recipes/match`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 
-      'ngrok-skip-browser-warning': 'true'},
-      body: JSON.stringify({ ingredients }),
-    });
-    const data = await response.json();
-    onGenerate(data);
-  }
+  const response = await fetch(`${API_URL}/api/recipes/match`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
+    },
+    body: JSON.stringify({ ingredients }),
+  });
+  const data = await response.json();
+  localStorage.removeItem('ingredients');  // ← clear after generating
+  onGenerate(data);
+}
 
   return (
     <div className="cook-screen">
