@@ -301,7 +301,7 @@ class RecipeSeeder extends Seeder
 
         Recipe::create([
             'name' => 'Cornsilog',
-            'image' => 'cornsilog.jpg',
+            'image' => 'cornsilog.png',
             'cook_time' => 10,
             'instructions' => json_encode([
                 ['title' => 'Step 1: Saute garlic and onion', 'instruction' => 'Heat oil in a pan. Saute garlic until golden then add onion and cook until softened.', 'timerSeconds' => 60, 'equipment' => ['Pan', 'Spatula']],
