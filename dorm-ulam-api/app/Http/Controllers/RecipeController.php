@@ -61,4 +61,11 @@ class RecipeController extends Controller
 
         return response()->json($recipes);
     }
+
+    // GET /api/recipes/trending — sorted by likes
+    public function trending()
+{
+    $recipes = Recipe::orderBy('likes', 'desc')->get();
+    return response()->json($recipes);
+}
 }

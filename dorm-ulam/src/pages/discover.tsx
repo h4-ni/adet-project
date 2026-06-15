@@ -17,15 +17,19 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
   const [selected, setSelected] = useState<any>(null);  // ← selected recipe for modal
 
   useEffect(() => {
-    fetch(`${API_URL}/api/recipes/trending`, {
-      headers: { 'ngrok-skip-browser-warning': 'true' }
+  fetch(`${API_URL}/api/recipes/trending`, {
+    headers: { 'ngrok-skip-browser-warning': 'true' }
+  })
+    .then(res => res.json())
+    .then(data => {
+      setRecipes(Array.isArray(data) ? data : []);  // ← make sure it's an array
+      setLoading(false);
     })
-      .then(res => res.json())
-      .then(data => {
-        setRecipes(data);
-        setLoading(false);
-      });
-  }, []);
+    .catch(() => {
+      setRecipes([]);
+      setLoading(false);
+    });
+}, []);
 
   async function toggleSave(recipeId: number) {
     const isSaved = saved.includes(recipeId);
