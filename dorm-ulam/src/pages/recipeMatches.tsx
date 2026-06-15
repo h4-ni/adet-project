@@ -43,7 +43,7 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
         <div>
           <h1 className="matches-title">Recipe Matches</h1>
           <p className="matches-subtitle">
-            Swak na swak, <span className="matches-highlight">lods!</span>
+            Ano cravings natin today, <span className="matches-highlight">Lab?</span>
           </p>
         </div>
       </div>

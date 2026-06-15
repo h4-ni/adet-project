@@ -45,7 +45,7 @@ interface Props {
 
       {/* SECTION 1: Header */}
         <h1 className="cook-title">
-        What <span className="cook-highlight">ingredients</span> do you have?
+        Lab, What <span className="cook-highlight">ingredients</span> do you have?
       </h1>
       
      
