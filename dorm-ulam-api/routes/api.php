@@ -23,5 +23,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/saved', [SavedRecipeController::class, 'index']);
     Route::post('/saved/{recipe}', [SavedRecipeController::class, 'store']);
     Route::delete('/saved/{recipe}', [SavedRecipeController::class, 'destroy']);
+    Route::get('/recipes/trending', [RecipeController::class, 'trending']);
 });
 });

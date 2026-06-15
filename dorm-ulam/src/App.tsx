@@ -138,6 +138,10 @@ export default function App() {
             token={token}
             user={user}
             onSettings={() => setScreen('settings')}
+            onStartCooking={(recipe) => {
+              setSelectedRecipe(recipe);
+              setScreen('cooking');
+            }}
           />
         )}
         {activeTab === 'saved' && (
