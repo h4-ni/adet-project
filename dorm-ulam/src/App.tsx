@@ -20,7 +20,6 @@ export default function App() {
   const [matchedRecipes, setMatchedRecipes] = useState<any[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
 
-  // ← load from localStorage on first render
   const [user, setUser] = useState<any>(() => {
     const saved = localStorage.getItem('user');
     return saved ? JSON.parse(saved) : null;
@@ -30,7 +29,6 @@ export default function App() {
     return localStorage.getItem('token') ?? '';
   });
 
-  // ← if token exists skip login
   useEffect(() => {
     if (token) setScreen('app');
   }, []);
@@ -46,16 +44,14 @@ export default function App() {
   async function handleLogout() {
     await fetch(`${API_URL}/api/logout`, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'ngrok-skip-browser-warning': 'true',
-      },
+      headers: { 'Authorization': `Bearer ${token}` },
     });
 
     setUser(null);
     setToken('');
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('liked_recipes');
     setScreen('login');
     setActiveTab('home');
   }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './discover.css';
 import WhiteCard from '../components/whiteCard';
 import API_URL from '../config';
@@ -13,8 +13,12 @@ interface Props {
 export default function Discover({ onSettings, token, user, onStartCooking }: Props) {
   const [recipes, setRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [liked, setLiked] = useState<number[]>([]);
+  const [liked, setLiked] = useState<number[]>(() => {
+    const saved = localStorage.getItem('liked_recipes');
+    return saved ? JSON.parse(saved) : [];   // ← persist liked state
+  });
   const [selected, setSelected] = useState<any>(null);
+  const processingRef = useRef<number[]>([]);  // ← tracks in-progress requests
 
   useEffect(() => {
     fetch(`${API_URL}/api/recipes/trending`, {
@@ -32,41 +36,52 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
   }, []);
 
   async function toggleLike(recipe: any) {
+    // ← prevent double clicking
+    if (processingRef.current.includes(recipe.id)) return;
+    processingRef.current = [...processingRef.current, recipe.id];
+
     const isLiked = liked.includes(recipe.id);
     const endpoint = isLiked ? 'unlike' : 'like';
     const saveMethod = isLiked ? 'DELETE' : 'POST';
 
-    // update likes count
-    const response = await fetch(`${API_URL}/api/recipes/${recipe.id}/${endpoint}`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true',
-      },
-    });
+    try {
+      const response = await fetch(`${API_URL}/api/recipes/${recipe.id}/${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    // also save/unsave
-    await fetch(`${API_URL}/api/saved/${recipe.id}`, {
-      method: saveMethod,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true',
-      },
-    });
+      await fetch(`${API_URL}/api/saved/${recipe.id}`, {
+        method: saveMethod,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
 
-    const updated = recipes.map(r =>
-      r.id === recipe.id ? { ...r, likes: data.likes } : r
-    ).sort((a, b) => b.likes - a.likes);
+      const updated = recipes.map(r =>
+        r.id === recipe.id ? { ...r, likes: data.likes } : r
+      ).sort((a, b) => b.likes - a.likes);
 
-    setRecipes(updated);
-    setLiked(isLiked
-      ? liked.filter(id => id !== recipe.id)
-      : [...liked, recipe.id]
-    );
+      setRecipes(updated);
+
+      const newLiked = isLiked
+        ? liked.filter(id => id !== recipe.id)
+        : [...liked, recipe.id];
+
+      setLiked(newLiked);
+      localStorage.setItem('liked_recipes', JSON.stringify(newLiked));  // ← save to localStorage
+
+    } finally {
+      // ← remove from processing after done
+      processingRef.current = processingRef.current.filter(id => id !== recipe.id);
+    }
   }
 
   function getTotalMins(recipe: any) {
@@ -131,6 +146,7 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
                     e.stopPropagation();
                     toggleLike(recipe);
                   }}
+                  disabled={processingRef.current.includes(recipe.id)}  // ← disable while processing
                 >
                   <span className="material-symbols-outlined">favorite</span>
                 </button>
@@ -140,24 +156,19 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
         )}
       </WhiteCard>
 
-      {/* Recipe Detail Modal */}
       {selected && (
         <div className="modal-overlay" onClick={() => setSelected(null)}>
           <div className="modal-card" onClick={e => e.stopPropagation()}>
-
             <img
               src={`/${selected.image}`}
               alt={selected.name}
               className="modal-img"
             />
-
             <button className="modal-close" onClick={() => setSelected(null)}>
               <span className="material-symbols-outlined">close</span>
             </button>
-
             <div className="modal-content">
               <h2 className="modal-title">{selected.name}</h2>
-
               <div className="modal-meta">
                 <span className="modal-meta-item">
                   <span className="material-symbols-outlined">schedule</span>
@@ -168,14 +179,12 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
                   {selected.likes} likes
                 </span>
               </div>
-
               <h3 className="modal-section-title">Ingredients</h3>
               <div className="modal-ingredients">
                 {selected.ingredients?.map((ing: string) => (
                   <span key={ing} className="modal-ingredient-tag">{ing}</span>
                 ))}
               </div>
-
               <button
                 className="modal-cook-btn"
                 onClick={() => {
@@ -187,7 +196,6 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
                 Start Cooking!
               </button>
             </div>
-
           </div>
         </div>
       )}
