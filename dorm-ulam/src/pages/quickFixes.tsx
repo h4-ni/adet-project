@@ -43,11 +43,10 @@ export default function QuickFixes({ onBack, onStartCooking }: Props) {
         <button onClick={onBack} style={{ background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer', color: '#E8681A' }}>
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
-        <h2 style={{ margin: '0 0 0 16px', fontSize: '20px' }}>Back to Home</h2>
       </header>
 
       <WhiteCard>
-        <h2 className="discover-title">⚡ Sarap Express (Under 15 mins)</h2>
+        <h2 className="discover-title">⚡ Abot Kamay Ang Sarap</h2>
 
         {loading ? (
           <p style={{ textAlign: 'center', color: '#888' }}>Loading fast meals...</p>

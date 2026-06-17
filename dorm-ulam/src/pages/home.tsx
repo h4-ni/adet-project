@@ -49,7 +49,7 @@ export default function Home({ onSettings, onQuickFixes, user }: Props) {
           <div className="menu-item" onClick={onQuickFixes}>
             <div className="menu-icon">⚡</div> 
             <div className="menu-text">
-              <p className="menu-title">Speedy Sarap</p>
+              <p className="menu-title">Abot Kamay Ang Sarap</p>
               <p className="menu-subtitle">Ready in 15 mins or less!</p>
             </div>
             <span className="menu-arrow material-symbols-outlined">arrow_forward</span>
