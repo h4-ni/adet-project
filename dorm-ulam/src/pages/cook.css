@@ -6,7 +6,8 @@
 }
 
 .cook-title {
-  font-size: 20px;
+  font-size: 17px; /* Reduced from 20px to help it fit */
+  white-space: nowrap; /* Forces the text to stay on exactly one line */
   font-weight: 700;
   margin-bottom: 15px;
   padding-top: 28px;
