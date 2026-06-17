@@ -10,11 +10,10 @@ import RecipeMatches from './pages/recipeMatches';
 import CookingSteps from './pages/cookingSteps';
 import Register from './pages/register';
 import API_URL from './config';
-import TipidMeals from './pages/tipidMeals';
 import QuickFixes from './pages/quickFixes';
 
 type Tab = 'home' | 'cook' | 'discover' | 'saved';
-type Screen = 'login' | 'register' | 'app' | 'settings' | 'matches' | 'cooking' | 'tipid' | 'quick';
+type Screen = 'login' | 'register' | 'app' | 'settings' | 'matches' | 'cooking' | 'quick';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('login');
@@ -114,19 +113,6 @@ export default function App() {
     );
   }
 
-  if (screen === 'tipid') {
-    return (
-      <TipidMeals 
-        token={token}
-        onBack={() => setScreen('app')} 
-        onStartCooking={(recipe) => {
-          setSelectedRecipe(recipe);
-          setScreen('cooking');
-        }}
-      />
-    );
-  }
-
   if (screen === 'quick') {
     return (
       <QuickFixes 
@@ -147,7 +133,6 @@ export default function App() {
           <Home
             user={user}
             onSettings={() => setScreen('settings')}
-            onTipidMeals={() => setScreen('tipid')}   
             onQuickFixes={() => setScreen('quick')}   
           />
         )}

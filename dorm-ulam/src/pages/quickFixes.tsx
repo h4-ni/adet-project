@@ -47,7 +47,7 @@ export default function QuickFixes({ onBack, onStartCooking }: Props) {
       </header>
 
       <WhiteCard>
-        <h2 className="discover-title">⚡ Quick Fixes (Under 15 mins)</h2>
+        <h2 className="discover-title">⚡ Sarap Express (Under 15 mins)</h2>
 
         {loading ? (
           <p style={{ textAlign: 'center', color: '#888' }}>Loading fast meals...</p>
