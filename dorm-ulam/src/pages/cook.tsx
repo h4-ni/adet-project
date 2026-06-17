@@ -6,14 +6,16 @@ interface Props {
   onGenerate: (recipes: any[]) => void;
 }
 
-  export default function Cook({ onGenerate }: Props) {
-    const [ingredients, setIngredients] = useState<string[]>(() => {
+export default function Cook({ onGenerate }: Props) {
+  const [ingredients, setIngredients] = useState<string[]>(() => {
     const saved = localStorage.getItem('ingredients');
     return saved ? JSON.parse(saved) : [];
   });
-    const [input, setInput] = useState('');
+  const [input, setInput] = useState('');
+  // 1. Add a loading state to track the API call
+  const [isGenerating, setIsGenerating] = useState(false);
 
-    function addIngredient() {
+  function addIngredient() {
     if (input.trim() === '') return;
     const updated = [...ingredients, input.trim()];
     setIngredients(updated);
@@ -28,27 +30,37 @@ interface Props {
   }
 
   async function generateRecipes() {
-  const response = await fetch(`${API_URL}/api/recipes/match`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'ngrok-skip-browser-warning': 'true'
-    },
-    body: JSON.stringify({ ingredients }),
-  });
-  const data = await response.json();
-  onGenerate(data);
-}
+    // 2. Prevent API calls if no ingredients are added
+    if (ingredients.length === 0) return; 
+    
+    setIsGenerating(true); // Start loading
+
+    try {
+      const response = await fetch(`${API_URL}/api/recipes/match`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
+        },
+        body: JSON.stringify({ ingredients }),
+      });
+      
+      const data = await response.json();
+      onGenerate(data);
+    } catch (error) {
+      console.error("Error generating recipes:", error);
+    } finally {
+      setIsGenerating(false); // Stop loading regardless of success/fail
+    }
+  }
 
   return (
     <div className="cook-screen">
 
       {/* SECTION 1: Header */}
-        <h1 className="cook-title">
+      <h1 className="cook-title">
         Lablab ko, what <span className="cook-highlight">ingredients</span> do you have?
       </h1>
-      
-     
 
       {/* SECTION 3: Input */}
       <div className="cook-input-row">
@@ -86,8 +98,13 @@ interface Props {
       </div>
 
       {/* SECTION 5: Generate button */}
-      <button className="generate-btn" onClick={generateRecipes}>
-        Generate Recipes
+      <button 
+        className="generate-btn" 
+        onClick={generateRecipes}
+        // 3. Disable the button if loading or if there are no ingredients
+        disabled={isGenerating || ingredients.length === 0}
+      >
+        {isGenerating ? 'Cooking up ideas...' : 'Generate Recipes'}
       </button>
 
     </div>

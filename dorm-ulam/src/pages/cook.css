@@ -114,7 +114,6 @@
   color: #E8681A;       /* orange on hover */
 }
 
-/* Generate button */
 .generate-btn {
   width: 100%;
   padding: 18px;
@@ -127,4 +126,26 @@
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(232, 104, 26, 0.3); /* Adds a nice glowing shadow */
+}
+
+/* Hover effect when it's active */
+.generate-btn:hover:not(:disabled) {
+  background-color: #D15815;
+  transform: translateY(-2px); /* Lifts up slightly */
+}
+
+/* Click effect */
+.generate-btn:active:not(:disabled) {
+  transform: translateY(1px); /* Pushes down when clicked */
+}
+
+/* Disabled state */
+.generate-btn:disabled {
+  background-color: #FFC5A3; /* Faded orange */
+  color: #FFF;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
