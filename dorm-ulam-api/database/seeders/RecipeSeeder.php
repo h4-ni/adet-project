@@ -17,10 +17,10 @@ class RecipeSeeder extends Seeder
         Recipe::create([
             'name' => 'Sizzling Hotdog',
             'image' => 'sizzling-hotdog.jpg',
-            'cook_time' => 8,
+            'cook_time' => 8, //5-6 change
             'instructions' => json_encode([
-                ['title' => 'Step 1: The Prep', 'instruction' => 'Slice the hotdogs diagonally. Chop the onions finely. Set aside.', 'timerSeconds' => 60, 'equipment' => ['Knife', 'Chopping Board']],
-                ['title' => 'Step 2: The Sizzle', 'instruction' => 'Add the sliced hotdogs to the pan. Saute until they are slightly browned and the edges start to curl.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 1: The Prep', 'instruction' => 'Slice the hotdogs diagonally. Chop the onions finely. Set aside.', 'timerSeconds' => 240, 'equipment' => ['Knife', 'Chopping Board']],
+                ['title' => 'Step 2: The Sizzle', 'instruction' => 'Add the sliced hotdogs to the pan. Saute until they are slightly browned and the edges start to curl.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
                 ['title' => 'Step 3: The Sauce', 'instruction' => 'Mix in the onions and palm oil. Stir fry for 2 minutes until fragrant.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
                 ['title' => 'Step 4: Serve', 'instruction' => 'Plate the sizzling hotdog and serve hot with rice. Enjoy!', 'timerSeconds' => 0, 'equipment' => ['Plate']],
             ]),
@@ -33,7 +33,7 @@ class RecipeSeeder extends Seeder
             'name' => 'Adobong Itlog',
             'image' => 'adobong-itlog.jpg',
             'cook_time' => 30,
-            'instructions' => json_encode([
+            'instructions' => json_encode([ //10-12
                 ['title' => 'Step 1: Boil the egg', 'instruction' => 'Boil an egg for 10-15 mins. Make sure its perfectly boiled.', 'timerSeconds' => 900, 'equipment' => ['Pot']],
                 ['title' => 'Step 2: Peel the egg', 'instruction' => 'Peel the egg for easy peeling. Use water with some ice.', 'timerSeconds' => 60, 'equipment' => ['Bowl']],
                 ['title' => 'Step 3: Saute', 'instruction' => 'Put oil in the pan. Add garlic then onion. This is optional: if you want some extra flavor add long chili.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
@@ -52,8 +52,8 @@ class RecipeSeeder extends Seeder
             'cook_time' => 20,
             'instructions' => json_encode([
                 ['title' => 'Step 1: Mince garlic', 'instruction' => 'Finely mince an uncomfortable amount of garlic.', 'timerSeconds' => 60, 'equipment' => ['Knife', 'Chopping Board']],
-                ['title' => 'Step 2: Boil noodles', 'instruction' => 'Boil your instant ramen 1 minute before al dente and rinse under cold water.', 'timerSeconds' => 300, 'equipment' => ['Pot']],
-                ['title' => 'Step 3: Make the sauce', 'instruction' => 'Melt some butter and cook the garlic for a couple of mins before adding Soy Sauce, Sugar, Parmesan and Oyster Sauce. Cook for 2 more minutes.', 'timerSeconds' => 240, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 2: Boil noodles', 'instruction' => 'Boil your instant ramen 3 minute before al dente and rinse under cold water.', 'timerSeconds' => 300, 'equipment' => ['Pot']],
+                ['title' => 'Step 3: Make the sauce', 'instruction' => 'Melt some butter and cook the garlic for a couple of mins before adding soy sauce, sugar, parmesan and oyster sauce. Cook for 2 more minutes.', 'timerSeconds' => 240, 'equipment' => ['Frying Pan', 'Spatula']],
                 ['title' => 'Step 4: Toss noodles', 'instruction' => 'Add in your noodles and toss until everything is well combined.', 'timerSeconds' => 60, 'equipment' => ['Frying Pan', 'Spatula']],
             ]),
             'ingredients' => ['garlic', 'instant ramen', 'butter', 'soy sauce', 'sugar', 'parmesan', 'oyster sauce'],
@@ -66,7 +66,7 @@ class RecipeSeeder extends Seeder
             'image' => 'soy-garlic-chicken.jpg',
             'cook_time' => 30,
             'instructions' => json_encode([
-                ['title' => 'Step 1: Marinate', 'instruction' => 'Mix chicken breast with salt, pepper, garlic powder, paprika, fish sauce, and egg.', 'timerSeconds' => 120, 'equipment' => ['Bowl']],
+                ['title' => 'Step 1: Marinate', 'instruction' => 'Mix chicken breast with salt, pepper, garlic powder, paprika, fish sauce, and egg.', 'timerSeconds' => 180, 'equipment' => ['Bowl']],
                 ['title' => 'Step 2: Coat', 'instruction' => 'Add all purpose flour and corn starch to the chicken and mix well.', 'timerSeconds' => 60, 'equipment' => ['Bowl']],
                 ['title' => 'Step 3: Fry', 'instruction' => 'Fry the chicken until golden brown and cooked through.', 'timerSeconds' => 600, 'equipment' => ['Frying Pan', 'Spatula']],
                 ['title' => 'Step 4: Make the sauce', 'instruction' => 'In a separate pan, melt butter, add garlic, soy sauce, vinegar, sugar, salt and pepper. Simmer until thickened.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
@@ -78,16 +78,16 @@ class RecipeSeeder extends Seeder
         ]);
 
         Recipe::create([
-            'name' => 'Sinigang',
+            'name' => 'Pork Sinigang',
             'image' => 'sinigang.jpg',
             'cook_time' => 20,
             'instructions' => json_encode([
-                ['title' => 'Step 1: Boil', 'instruction' => 'Mix water, onion, tomatoes, and green chili in a pot. Simmer for 10 mins.', 'timerSeconds' => 600, 'equipment' => ['Pot']],
+                ['title' => 'Step 1: Boil', 'instruction' => 'Mix water, onion, tomatoes, and green chili in a pot. Simmer for 10 minutes.', 'timerSeconds' => 600, 'equipment' => ['Pot']],
                 ['title' => 'Step 2: Add sinigang mix', 'instruction' => 'Add sinigang mix and stir well.', 'timerSeconds' => 60, 'equipment' => ['Pot', 'Spoon']],
-                ['title' => 'Step 3: Add shrimp cubes', 'instruction' => 'Add shrimp cubes — just half. Add salt then adjust to your desired taste.', 'timerSeconds' => 120, 'equipment' => ['Pot', 'Spoon']],
+                ['title' => 'Step 3: Add pork cubes', 'instruction' => 'Add pork cubes — just half. Add salt then adjust to your desired taste.', 'timerSeconds' => 120, 'equipment' => ['Pot', 'Spoon']],
                 ['title' => 'Step 4: Serve', 'instruction' => 'Serve hot with rice. Enjoy!', 'timerSeconds' => 0, 'equipment' => ['Bowl']],
             ]),
-            'ingredients' => ['water', 'onion', 'tomatoes', 'green chili', 'sinigang mix', 'shrimp cubes', 'salt'],
+            'ingredients' => ['water', 'onion', 'tomatoes', 'green chili', 'sinigang mix', 'shrimp cubes', 'salt', 'pork'],
             'equipment' => ['Pot', 'Spoon', 'Bowl'],
             'likes' => 9,
         ]);
@@ -96,14 +96,14 @@ class RecipeSeeder extends Seeder
             'name' => 'Tofu Sisig',
             'image' => 'tofu-sisig.jpg',
             'cook_time' => 20,
-            'instructions' => json_encode([
+            'instructions' => json_encode([  //prep tofu
                 ['title' => 'Step 1: Make the dressing', 'instruction' => 'Combine mayonnaise, liquid seasoning, calamansi, and pepper in a bowl.', 'timerSeconds' => 120, 'equipment' => ['Bowl', 'Spoon']],
                 ['title' => 'Step 2: Fry the tofu', 'instruction' => 'Heat oil and deep fry tofu until golden brown. Remove from the pan and set aside to rest.', 'timerSeconds' => 300, 'equipment' => ['Pan', 'Plate']],
                 ['title' => 'Step 3: Saute', 'instruction' => 'From the same pan, add half of the onions and peppers and wait for it to soften.', 'timerSeconds' => 120, 'equipment' => ['Pan', 'Spatula']],
                 ['title' => 'Step 4: Add tofu', 'instruction' => 'Add the tofu back to the pan and continue cooking.', 'timerSeconds' => 30, 'equipment' => ['Pan', 'Spatula']],
                 ['title' => 'Step 5: Dress and serve', 'instruction' => 'Transfer tofu to a bowl and add the dressing and remaining onion and peppers. Toss evenly.', 'timerSeconds' => 60, 'equipment' => ['Bowl', 'Spoon']],
             ]),
-            'ingredients' => ['tofu', 'onion', 'salt', 'pepper', 'chili', 'calamansi', 'liquid seasoning', 'mayonnaise'],
+            'ingredients' => ['tofu', 'onion', 'salt', 'pepper', 'chili', 'calamansi', 'liquid seasoning', 'mayonnaise', 'oil'],
             'equipment' => ['Bowl', 'Spoon', 'Pan', 'Spatula', 'Plate'],
             'likes' => 6,
         ]);
@@ -111,7 +111,7 @@ class RecipeSeeder extends Seeder
         Recipe::create([
             'name' => 'Tomato Egg',
             'image' => 'tomato-egg.jpg',
-            'cook_time' => 15,
+            'cook_time' => 15, //oil
             'instructions' => json_encode([
                 ['title' => 'Step 1: Prepare the egg', 'instruction' => 'Crack an egg into a bowl and scramble it thoroughly. Add salt and pepper to taste.', 'timerSeconds' => 60, 'equipment' => ['Bowl', 'Fork']],
                 ['title' => 'Step 2: Chop tomatoes', 'instruction' => 'Chop tomatoes into small pieces.', 'timerSeconds' => 60, 'equipment' => ['Chopping Board', 'Knife']],
@@ -128,7 +128,7 @@ class RecipeSeeder extends Seeder
         Recipe::create([
             'name' => 'Instant Noodles Ramen',
             'image' => 'instant-noodles.jpg',
-            'cook_time' => 10,
+            'cook_time' => 10, //peel the egg
             'instructions' => json_encode([
                 ['title' => 'Step 1: Boil everything', 'instruction' => 'Boil the instant noodles in a pot or rice cooker along with the pechay and egg. Set a timer so the ingredients do not get overcooked.', 'timerSeconds' => 420, 'equipment' => ['Pot/Rice Cooker']],
                 ['title' => 'Step 2: Serve', 'instruction' => 'Once the noodles, pechay, and egg are cooked, serve them up while its hot.', 'timerSeconds' => 0, 'equipment' => ['Bowl']],
@@ -142,7 +142,7 @@ class RecipeSeeder extends Seeder
         Recipe::create([
             'name' => 'Stir Fried Veggies',
             'image' => 'stir-fried-veggies.jpg',
-            'cook_time' => 15,
+            'cook_time' => 15, // oil
             'instructions' => json_encode([
                 ['title' => 'Step 1: Chop veggies', 'instruction' => 'Chop up your vegetables thinly and set them aside.', 'timerSeconds' => 300, 'equipment' => ['Chopping Board', 'Knife']],
                 ['title' => 'Step 2: Prepare egg', 'instruction' => 'Crack an egg and scramble it thoroughly. Add salt and pepper to taste.', 'timerSeconds' => 60, 'equipment' => ['Bowl', 'Fork']],
@@ -220,7 +220,7 @@ class RecipeSeeder extends Seeder
         Recipe::create([
             'name' => 'Soy Garlic Marble Potato',
             'image' => 'soy-garlic-potato.jpg',
-            'cook_time' => 25,
+            'cook_time' => 25, //wag na ipeel ang potato
             'instructions' => json_encode([
                 ['title' => 'Step 1: The Prep', 'instruction' => 'Peel and slice potatoes into even pieces. Mince garlic. Set aside.', 'timerSeconds' => 30, 'equipment' => ['Knife', 'Chopping Board']],
                 ['title' => 'Step 2: Boil potatoes', 'instruction' => 'Boil potatoes until just tender. Drain and let cool slightly. Smash lightly with a fork or back of a spoon.', 'timerSeconds' => 120, 'equipment' => ['Pot', 'Fork or Spoon']],
@@ -272,7 +272,7 @@ class RecipeSeeder extends Seeder
             'image' => 'sardines-pasta.jpg',
             'cook_time' => 20,
             'instructions' => json_encode([
-                ['title' => 'Step 1: Boil the pasta', 'instruction' => 'Boil pasta in salted water until al dente. Drain and set aside. Reserve a cup of pasta water.', 'timerSeconds' => 600, 'equipment' => ['Pot']],
+                ['title' => 'Step 1: Boil the pasta', 'instruction' => 'Boil pasta in salted water until al dente. Drain and set aside. Reserve a cup of pasta water.', 'timerSeconds' => 480, 'equipment' => ['Pot']],
                 ['title' => 'Step 2: Saute garlic', 'instruction' => 'Heat oil in a pan. Saute garlic until golden and fragrant.', 'timerSeconds' => 60, 'equipment' => ['Pan', 'Spatula']],
                 ['title' => 'Step 3: Add sardines', 'instruction' => 'Add the canned sardines including the sauce. Break them up slightly with a spoon.', 'timerSeconds' => 60, 'equipment' => ['Pan', 'Spatula']],
                 ['title' => 'Step 4: Combine', 'instruction' => 'Add the drained pasta and toss everything together. Add a splash of pasta water if too dry.', 'timerSeconds' => 60, 'equipment' => ['Pan', 'Spatula']],
@@ -286,7 +286,7 @@ class RecipeSeeder extends Seeder
         Recipe::create([
             'name' => 'Cheesy Scrambled Eggs',
             'image' => 'cheesy-scrambled-egg.jpg',
-            'cook_time' => 10,
+            'cook_time' => 10, //cheddar cheese
             'instructions' => json_encode([
                 ['title' => 'Step 1: Crack and season', 'instruction' => 'Crack eggs into a bowl. Add salt, pepper, and a splash of milk. Whisk until fully combined.', 'timerSeconds' => 60, 'equipment' => ['Bowl', 'Fork']],
                 ['title' => 'Step 2: Heat the pan', 'instruction' => 'Melt butter in a pan over low-medium heat. Do not let it brown.', 'timerSeconds' => 30, 'equipment' => ['Pan']],
@@ -302,7 +302,7 @@ class RecipeSeeder extends Seeder
         Recipe::create([
             'name' => 'Cornsilog',
             'image' => 'corn-silog.jpg',
-            'cook_time' => 10,
+            'cook_time' => 10, // change step 4
             'instructions' => json_encode([
                 ['title' => 'Step 1: Saute garlic and onion', 'instruction' => 'Heat oil in a pan. Saute garlic until golden then add onion and cook until softened.', 'timerSeconds' => 60, 'equipment' => ['Pan', 'Spatula']],
                 ['title' => 'Step 2: Add corned beef', 'instruction' => 'Open the can and add the corned beef. Break it up and mix well with the garlic and onion.', 'timerSeconds' => 120, 'equipment' => ['Pan', 'Spatula']],
@@ -330,6 +330,37 @@ class RecipeSeeder extends Seeder
             'ingredients' => ['munggo beans', 'garlic', 'onion', 'tomato', 'fish sauce', 'salt', 'pepper', 'oil', 'water'],
             'equipment' => ['Pot', 'Pan', 'Spatula', 'Bowl'],
             'likes' => 10,
+        ]);
+
+        Recipe::create([
+            'name' => 'Sardinas with Miswa',
+            'image' => 'sardinas-with-miswa.jpg',
+            'cook_time' => 9,
+            'instructions' => json_encode([
+                ['title' => 'Step 1: The Prep', 'instruction' => 'Slice tomato, onion, and garlic if using. Set aside.', 'timerSeconds' => 180, 'equipment' => ['Knife', 'Chopping Board']],
+                ['title' => 'Step 2: The Boil', 'instruction' => 'Boil water in a pot. Add sardines and bring to a simmer.', 'timerSeconds' => 180, 'equipment' => ['Pot']],
+                ['title' => 'Step 3: Add the miswa', 'instruction' => 'Toss in miswa noodles and cook for 2-3 minutes until tender.', 'timerSeconds' => 180, 'equipment' => ['Pot', 'Ladle']],
+                ['title' => 'Step 4: Serve', 'instruction' => 'Season to taste. Add optional toppings like tomato, onion, or garlic. Serve hot.', 'timerSeconds' => 0, 'equipment' => ['Bowl']],
+            ]),
+            'ingredients' => ['sardines', 'miswa noodles', 'tomato', 'onion', 'garlic', 'oil', 'water'], 
+            'equipment' => ['Pot', 'Knife', 'Chopping Board', 'Laddle','Bowl'],
+            'likes' => 5,
+        ]);
+
+        Recipe::create([
+            'name' => 'Tortang Talong',
+            'image' => 'tortang-talong.jpg',
+            'cook_time' => 10, // oil heat pan mix the egg sa talong
+            'instructions' => json_encode([
+                ['title' => 'Step 1: The Prep', 'instruction' => 'Beat egg in a bowl. Season with salt and pepper. Set aside.', 'timerSeconds' => 30, 'equipment' => ['Bowl', 'Fork']],
+                ['title' => 'Step 2: The Char', 'instruction' => 'Grill or char eggplant directly over stove flame until skin is blackened all around.', 'timerSeconds' => 300, 'equipment' => ['Stove', 'Tongs']],
+                ['title' => 'Step 3: Flatten Eggplant', 'instruction' => 'Peel off the charred skin, then flatten the flesh with a fork.', 'timerSeconds' => 120, 'equipment' => ['Plate', 'Fork']],
+                ['title' => 'Step 4: The Fry', 'instruction' => 'Dip flattened eggplant in beaten egg and fry both sides until golden.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 5: Serve', 'instruction' => 'Once the egg is fully cooked, turn off the heat. Serve hot.', 'timerSeconds' => 0, 'equipment' => ['Plate']],
+            ]),
+            'ingredients' => ['eggplant', 'egg', 'salt', 'pepper', 'oil'],
+            'equipment' => ['Bowl', 'Fork', 'Stove', 'Tongs', 'Plate', 'Frying Pan', 'Spatula'],
+            'likes' => 7,
         ]);
     }
 }
