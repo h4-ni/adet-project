@@ -19,4 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/saved', [SavedRecipeController::class, 'index']);
     Route::post('/saved/{recipe}', [SavedRecipeController::class, 'store']);
     Route::delete('/saved/{recipe}', [SavedRecipeController::class, 'destroy']);
+    Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like']);      
+    Route::post('/recipes/{recipe}/unlike', [RecipeController::class, 'unlike']);  
 });

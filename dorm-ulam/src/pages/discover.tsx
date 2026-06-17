@@ -7,29 +7,29 @@ interface Props {
   onSettings: () => void;
   token: string;
   user: any;
-  onStartCooking: (recipe: any) => void;  // ← new prop
+  onStartCooking: (recipe: any) => void;
 }
 
 export default function Discover({ onSettings, token, user, onStartCooking }: Props) {
   const [recipes, setRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState<number[]>([]);
-  const [selected, setSelected] = useState<any>(null);  // ← selected recipe for modal
+  const [selected, setSelected] = useState<any>(null);
 
   useEffect(() => {
-  fetch(`${API_URL}/api/recipes/trending`, {
-    headers: { 'ngrok-skip-browser-warning': 'true' }
-  })
-    .then(res => res.json())
-    .then(data => {
-      setRecipes(Array.isArray(data) ? data : []);  // ← make sure it's an array
-      setLoading(false);
+    fetch(`${API_URL}/api/recipes/trending`, {
+      headers: { 'ngrok-skip-browser-warning': 'true' }
     })
-    .catch(() => {
-      setRecipes([]);
-      setLoading(false);
-    });
-}, []);
+      .then(res => res.json())
+      .then(data => {
+        setRecipes(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch(() => {
+        setRecipes([]);
+        setLoading(false);
+      });
+  }, []);
 
   async function toggleSave(recipeId: number) {
     const isSaved = saved.includes(recipeId);
@@ -51,7 +51,33 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
     }
   }
 
-  // parse total time from steps
+  async function toggleLike(recipe: any) {
+    const isLiked = saved.includes(recipe.id);
+    const endpoint = isLiked ? 'unlike' : 'like';
+
+    const response = await fetch(`${API_URL}/api/recipes/${recipe.id}/${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
+    });
+
+    const data = await response.json();
+
+    // update likes count and re-sort
+    const updated = recipes.map(r =>
+      r.id === recipe.id ? { ...r, likes: data.likes } : r
+    ).sort((a, b) => b.likes - a.likes);  // ← re-sort by likes
+
+    setRecipes(updated);
+    setSaved(isLiked
+      ? saved.filter(id => id !== recipe.id)
+      : [...saved, recipe.id]
+    );
+  }
+
   function getTotalMins(recipe: any) {
     const steps = typeof recipe?.instructions === 'string'
       ? JSON.parse(recipe.instructions)
@@ -88,7 +114,7 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
               <div
                 key={recipe.id}
                 className="discover-card"
-                onClick={() => setSelected(recipe)}  // ← open modal
+                onClick={() => setSelected(recipe)}
               >
                 <img
                   src={`/${recipe.image}`}
@@ -112,7 +138,7 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
                   className={`discover-like ${saved.includes(recipe.id) ? 'liked' : ''}`}
                   onClick={e => {
                     e.stopPropagation();
-                    toggleSave(recipe.id);
+                    toggleLike(recipe);   // ← now calls toggleLike
                   }}
                 >
                   <span className="material-symbols-outlined">favorite</span>

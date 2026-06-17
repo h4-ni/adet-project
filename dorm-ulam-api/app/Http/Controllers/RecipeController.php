@@ -68,4 +68,20 @@ class RecipeController extends Controller
     $recipes = Recipe::orderBy('likes', 'desc')->get();
     return response()->json($recipes);
 }
+
+    // POST /api/recipes/{recipe}/like
+    public function like(Recipe $recipe)
+    {
+        $recipe->increment('likes');
+        return response()->json(['likes' => $recipe->likes]);
+    }
+
+    // POST /api/recipes/{recipe}/unlike
+    public function unlike(Recipe $recipe)
+    {
+        if ($recipe->likes > 0) {
+            $recipe->decrement('likes');
+        }
+        return response()->json(['likes' => $recipe->likes]);
+    }
 }
