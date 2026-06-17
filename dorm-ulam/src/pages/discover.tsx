@@ -31,25 +31,6 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
       });
   }, []);
 
-  async function toggleSave(recipeId: number) {
-    const isSaved = saved.includes(recipeId);
-    const method = isSaved ? 'DELETE' : 'POST';
-
-    await fetch(`${API_URL}/api/saved/${recipeId}`, {
-      method,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true',
-      },
-    });
-
-    if (isSaved) {
-      setSaved(saved.filter(id => id !== recipeId));
-    } else {
-      setSaved([...saved, recipeId]);
-    }
-  }
 
   async function toggleLike(recipe: any) {
     const isLiked = saved.includes(recipe.id);
