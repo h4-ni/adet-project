@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './discover.css';
 import WhiteCard from '../components/whiteCard';
 import API_URL from '../config';
-import './App.css';
+import RecipeModal from '../components/recipeModal';
 
 interface Props {
   onSettings: () => void;
@@ -173,47 +173,11 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
       </WhiteCard>
 
       {selected && (
-        <div className="modal-overlay" onClick={() => setSelected(null)}>
-          <div className="modal-card" onClick={e => e.stopPropagation()}>
-            <img
-              src={`/${selected.image}`}
-              alt={selected.name}
-              className="modal-img"
-            />
-            <button className="modal-close" onClick={() => setSelected(null)}>
-              <span className="material-symbols-outlined">close</span>
-            </button>
-            <div className="modal-content">
-              <h2 className="modal-title">{selected.name}</h2>
-              <div className="modal-meta">
-                <span className="modal-meta-item">
-                  <span className="material-symbols-outlined">schedule</span>
-                  {getTotalMins(selected)} mins
-                </span>
-                <span className="modal-meta-item">
-                  <span className="material-symbols-outlined">favorite</span>
-                  {selected.likes} likes
-                </span>
-              </div>
-              <h3 className="modal-section-title">Ingredients</h3>
-              <div className="modal-ingredients">
-                {selected.ingredients?.map((ing: string) => (
-                  <span key={ing} className="modal-ingredient-tag">{ing}</span>
-                ))}
-              </div>
-              <button
-                className="modal-cook-btn"
-                onClick={() => {
-                  setSelected(null);
-                  onStartCooking(selected);
-                }}
-              >
-                <span className="material-symbols-outlined">restaurant</span>
-                Start Cooking!
-              </button>
-            </div>
-          </div>
-        </div>
+        <RecipeModal 
+          recipe={selected} 
+          onClose={() => setSelected(null)} 
+          onStartCooking={onStartCooking} 
+        />
       )}
 
     </div>
