@@ -12,11 +12,12 @@
 }
 
 .modal-card {
+  position: relative; /* 1. THIS LOCKS THE 'X' BUTTON INSIDE THE CARD */
   background: white;
   border-radius: 24px;
   width: 90%;
   max-width: 400px;
-  max-height: 70dvh;
+  max-height: 85dvh; /* 2. INCREASED HEIGHT so more ingredients fit without scrolling */
   overflow-y: auto;
   margin: 0;
   margin-bottom: env(safe-area-inset-bottom, 0px);
