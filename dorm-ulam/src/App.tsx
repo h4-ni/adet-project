@@ -79,8 +79,13 @@ export default function App() {
     return (
       <Settings
         user={user}
+        token={token} 
         onBack={() => setScreen('app')}
         onLogout={handleLogout}
+        onUpdateUser={(updatedUser) => {  {/* ← Let settings update the global profile */}
+          setUser(updatedUser);
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+        }}
       />
     );
   }
