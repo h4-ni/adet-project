@@ -13,7 +13,7 @@ interface Props {
 export default function Discover({ onSettings, token, user, onStartCooking }: Props) {
   const [recipes, setRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [saved, setSaved] = useState<number[]>([]);
+  const [liked, setLiked] = useState<number[]>([]);
   const [selected, setSelected] = useState<any>(null);
 
   useEffect(() => {
@@ -31,11 +31,12 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
       });
   }, []);
 
-
   async function toggleLike(recipe: any) {
-    const isLiked = saved.includes(recipe.id);
+    const isLiked = liked.includes(recipe.id);
     const endpoint = isLiked ? 'unlike' : 'like';
+    const saveMethod = isLiked ? 'DELETE' : 'POST';
 
+    // update likes count
     const response = await fetch(`${API_URL}/api/recipes/${recipe.id}/${endpoint}`, {
       method: 'POST',
       headers: {
@@ -47,15 +48,24 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
 
     const data = await response.json();
 
-    // update likes count and re-sort
+    // also save/unsave
+    await fetch(`${API_URL}/api/saved/${recipe.id}`, {
+      method: saveMethod,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
+    });
+
     const updated = recipes.map(r =>
       r.id === recipe.id ? { ...r, likes: data.likes } : r
-    ).sort((a, b) => b.likes - a.likes);  // ← re-sort by likes
+    ).sort((a, b) => b.likes - a.likes);
 
     setRecipes(updated);
-    setSaved(isLiked
-      ? saved.filter(id => id !== recipe.id)
-      : [...saved, recipe.id]
+    setLiked(isLiked
+      ? liked.filter(id => id !== recipe.id)
+      : [...liked, recipe.id]
     );
   }
 
@@ -116,10 +126,10 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
                   </div>
                 </div>
                 <button
-                  className={`discover-like ${saved.includes(recipe.id) ? 'liked' : ''}`}
+                  className={`discover-like ${liked.includes(recipe.id) ? 'liked' : ''}`}
                   onClick={e => {
                     e.stopPropagation();
-                    toggleLike(recipe);   // ← now calls toggleLike
+                    toggleLike(recipe);
                   }}
                 >
                   <span className="material-symbols-outlined">favorite</span>
