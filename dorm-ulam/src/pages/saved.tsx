@@ -11,6 +11,9 @@ interface Props {
 export default function Saved({ onSettings, user, token }: Props) {
   const [savedRecipes, setSavedRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // 1. Add state for the search query
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     fetch(`${API_URL}/api/saved`, {
@@ -24,7 +27,7 @@ export default function Saved({ onSettings, user, token }: Props) {
         setSavedRecipes(data);
         setLoading(false);
       });
-  }, []);
+  }, [token]);
 
   async function unsaveRecipe(recipeId: number) {
     await fetch(`${API_URL}/api/saved/${recipeId}`, {
@@ -38,6 +41,11 @@ export default function Saved({ onSettings, user, token }: Props) {
     setSavedRecipes(savedRecipes.filter(r => r.id !== recipeId));
   }
 
+  // 2. Filter recipes based on the search query
+  const filteredRecipes = savedRecipes.filter(recipe =>
+    recipe.name.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
     <div className="saved-screen">
 
@@ -48,7 +56,14 @@ export default function Saved({ onSettings, user, token }: Props) {
         </div>
         <div className="search">
           <span className="search-icon material-symbols-outlined">search</span>
-          <input className="search-input" type="search" placeholder="Search" />
+          {/* 3. Wire up the input field to our query state */}
+          <input 
+            className="search-input" 
+            type="search" 
+            placeholder="Search saved recipes..." 
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+          />
         </div>
       </header>
 
@@ -69,9 +84,14 @@ export default function Saved({ onSettings, user, token }: Props) {
           <p className="saved-empty-text">No saved recipes yet!</p>
           <p className="saved-empty-sub">Heart a recipe to save it here.</p>
         </div>
+      ) : filteredRecipes.length === 0 ? (
+        <p style={{ textAlign: 'center', color: '#888', marginTop: '16px' }}>
+          No saved recipes found for "{query}"
+        </p>
       ) : (
         <div className="saved-list">
-          {savedRecipes.map(recipe => (
+          {/* 4. Map over filteredRecipes instead of savedRecipes */}
+          {filteredRecipes.map(recipe => (
             <div key={recipe.id} className="saved-card">
               <img
                 src={`/${recipe.image}`}

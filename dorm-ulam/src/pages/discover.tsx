@@ -15,10 +15,11 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
   const [loading, setLoading] = useState(true);
   const [liked, setLiked] = useState<number[]>(() => {
     const saved = localStorage.getItem('liked_recipes');
-    return saved ? JSON.parse(saved) : [];   // ← persist liked state
+    return saved ? JSON.parse(saved) : [];
   });
   const [selected, setSelected] = useState<any>(null);
-  const processingRef = useRef<number[]>([]);  // ← tracks in-progress requests
+  const [query, setQuery] = useState('');
+  const processingRef = useRef<number[]>([]);
 
   useEffect(() => {
     fetch(`${API_URL}/api/recipes/trending`, {
@@ -36,7 +37,6 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
   }, []);
 
   async function toggleLike(recipe: any) {
-    // ← prevent double clicking
     if (processingRef.current.includes(recipe.id)) return;
     processingRef.current = [...processingRef.current, recipe.id];
 
@@ -76,10 +76,9 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
         : [...liked, recipe.id];
 
       setLiked(newLiked);
-      localStorage.setItem('liked_recipes', JSON.stringify(newLiked));  // ← save to localStorage
+      localStorage.setItem('liked_recipes', JSON.stringify(newLiked));
 
     } finally {
-      // ← remove from processing after done
       processingRef.current = processingRef.current.filter(id => id !== recipe.id);
     }
   }
@@ -92,6 +91,10 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
     return Math.ceil(totalSeconds / 60);
   }
 
+  const filteredRecipes = recipes.filter(recipe =>
+    recipe.name.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
     <div className="discover-screen">
 
@@ -101,7 +104,13 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
         </div>
         <div className="search">
           <span className="search-icon material-symbols-outlined">search</span>
-          <input className="search-input" type="search" placeholder="Search" />
+          <input
+            className="search-input"
+            type="search"
+            placeholder="Search recipes..."
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+          />
         </div>
       </header>
 
@@ -116,42 +125,48 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
           <p style={{ textAlign: 'center', color: '#888' }}>Loading...</p>
         ) : (
           <div className="discover-list">
-            {recipes.map(recipe => (
-              <div
-                key={recipe.id}
-                className="discover-card"
-                onClick={() => setSelected(recipe)}
-              >
-                <img
-                  src={`/${recipe.image}`}
-                  alt={recipe.name}
-                  className="discover-card-img"
-                />
-                <div className="discover-card-info">
-                  <p className="discover-card-name">{recipe.name}</p>
-                  <div className="discover-card-meta">
-                    <p className="discover-card-time">
-                      <span className="material-symbols-outlined">schedule</span>
-                      {getTotalMins(recipe)} mins
-                    </p>
-                    <p className="discover-card-likes">
-                      <span className="material-symbols-outlined">favorite</span>
-                      {recipe.likes}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  className={`discover-like ${liked.includes(recipe.id) ? 'liked' : ''}`}
-                  onClick={e => {
-                    e.stopPropagation();
-                    toggleLike(recipe);
-                  }}
-                  disabled={processingRef.current.includes(recipe.id)}  // ← disable while processing
+            {filteredRecipes.length === 0 ? (
+              <p style={{ textAlign: 'center', color: '#888', marginTop: '16px' }}>
+                No recipes found for "{query}"
+              </p>
+            ) : (
+              filteredRecipes.map(recipe => (
+                <div
+                  key={recipe.id}
+                  className="discover-card"
+                  onClick={() => setSelected(recipe)}
                 >
-                  <span className="material-symbols-outlined">favorite</span>
-                </button>
-              </div>
-            ))}
+                  <img
+                    src={`/${recipe.image}`}
+                    alt={recipe.name}
+                    className="discover-card-img"
+                  />
+                  <div className="discover-card-info">
+                    <p className="discover-card-name">{recipe.name}</p>
+                    <div className="discover-card-meta">
+                      <p className="discover-card-time">
+                        <span className="material-symbols-outlined">schedule</span>
+                        {getTotalMins(recipe)} mins
+                      </p>
+                      <p className="discover-card-likes">
+                        <span className="material-symbols-outlined">favorite</span>
+                        {recipe.likes}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    className={`discover-like ${liked.includes(recipe.id) ? 'liked' : ''}`}
+                    onClick={e => {
+                      e.stopPropagation();
+                      toggleLike(recipe);
+                    }}
+                    disabled={processingRef.current.includes(recipe.id)}
+                  >
+                    <span className="material-symbols-outlined">favorite</span>
+                  </button>
+                </div>
+              ))
+            )}
           </div>
         )}
       </WhiteCard>
