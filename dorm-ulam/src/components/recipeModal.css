@@ -102,6 +102,7 @@
 .modal-cook-btn {
   width: 100%;
   padding: 16px;
+  margin-top: 32px; /* This is the magic line that pushes it down! */
   background: #E8681A;
   color: white;
   border: none;
