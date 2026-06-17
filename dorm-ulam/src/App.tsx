@@ -119,8 +119,8 @@ export default function App() {
           <Home
             user={user}
             onSettings={() => setScreen('settings')}
-            onDiscover={() => setActiveTab('discover')}
-            onSaved={() => setActiveTab('saved')}
+            onTipidMeals={() => alert('Tipid Meals feature coming soon!')}
+            onQuickFixes={() => alert('Quick Fixes feature coming soon!')}
           />
         )}
         {activeTab === 'cook' && (
