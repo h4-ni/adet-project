@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './discover.css';
 import WhiteCard from '../components/whiteCard';
 import API_URL from '../config';
-import './app.css';
+import '.src/app.css';
 
 interface Props {
   onSettings: () => void;
