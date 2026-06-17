@@ -3,19 +3,19 @@ import WhiteCard from '../components/whiteCard';
 
 interface Props {
   onSettings: () => void;
-  onDiscover: () => void;
-  onSaved: () => void;
+  onTipidMeals: () => void;  /* ← Updated prop for the new budget button */
+  onQuickFixes: () => void;  /* ← Updated prop for the new fast meals button */
   user: any;
 }
 
-export default function Home({ onSettings, onDiscover, onSaved, user }: Props) {
+export default function Home({ onSettings, onTipidMeals, onQuickFixes, user }: Props) {
   return (
     <div className="home-screen">
 
       {/* SECTION 1: Header */}
       <header className="home-header">
         <div className="avatar" onClick={onSettings}>
-          {user?.name?.charAt(0).toUpperCase() ?? 'U'} {/* ← first letter of name */}
+          {user?.name?.charAt(0).toUpperCase() ?? 'U'} 
         </div>
         <div className="search">
           <span className="search-icon material-symbols-outlined">search</span>
@@ -30,7 +30,7 @@ export default function Home({ onSettings, onDiscover, onSaved, user }: Props) {
 
       <WhiteCard>
 
-        <h1 className="hero-name">Hi, Lab {user?.name?.split(' ')[0] ?? 'User'}!</h1>
+        <h1 className="hero-name">Hi, Lab {user?.name?.split(' ')[0] ?? 'User'} ko</h1>
         <p className="hero-subtitle">Luto na tayo!</p>
 
         {/* SECTION 3: Ulam of the Day */}
@@ -49,20 +49,20 @@ export default function Home({ onSettings, onDiscover, onSaved, user }: Props) {
         {/* SECTION 4: Menu */}
         <section className="home-menu">
 
-          <div className="menu-item" onClick={onDiscover}>  {/* ← goes to Discover */}
-            <div className="menu-icon">⭐</div>
+          <div className="menu-item" onClick={onTipidMeals}>  {/* ← Now triggers Tipid Meals */}
+            <div className="menu-icon">🐷</div> {/* Piggy bank for budget! */}
             <div className="menu-text">
-              <p className="menu-title">Trending Ulam</p>
-              <p className="menu-subtitle">Most cooked this week</p>
+              <p className="menu-title">Tipid Meals</p>
+              <p className="menu-subtitle">Petsa de Peligro Picks</p>
             </div>
             <span className="menu-arrow material-symbols-outlined">arrow_forward</span>
           </div>
 
-          <div className="menu-item" onClick={onSaved}>     {/* ← goes to Saved */}
-            <div className="menu-icon">🧺</div>
+          <div className="menu-item" onClick={onQuickFixes}>  {/* ← Now triggers Quick Fixes */}
+            <div className="menu-icon">⚡</div> {/* Lightning bolt for speed! */}
             <div className="menu-text">
-              <p className="menu-title">Your Favorites</p>
-              <p className="menu-subtitle">Saved recipes for later</p>
+              <p className="menu-title">Quick Fixes</p>
+              <p className="menu-subtitle">Under 15 minutes</p>
             </div>
             <span className="menu-arrow material-symbols-outlined">arrow_forward</span>
           </div>
