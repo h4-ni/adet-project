@@ -53,8 +53,7 @@ export default function RecipeModal({ recipe, onClose, onStartCooking }: Props) 
               onStartCooking(recipe);
             }}
           >
-            <span className="material-symbols-outlined">restaurant</span>
-            Luto na tayo, Lab!
+            Cook na tayo, Lablab ko!
           </button>
         </div>
       </div>
