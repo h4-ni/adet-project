@@ -1,23 +1,19 @@
 .home-screen {
   background-color: #FDDEC9;
-  min-height: 100vh;
+  height: 100dvh; /* Locks exact screen height dynamically */
+  overflow: hidden; /* Kills the scroll bar completely */
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;   /* ← add this */
-  padding-bottom: 90px;   /* ← add this */
-
+  padding-bottom: 90px; /* Keeps your bottom nav safe */
+  box-sizing: border-box; /* Crucial so padding doesn't stretch the screen */
 }
 
 .home-header {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  max-width: 360px;
-  margin: 0 auto;
-  padding-top: 48px;
-  padding-bottom: 8px;
-  width: 100%;
+  justify-content: flex-end; /* Moves avatar cleanly to the right */
+  padding: 24px 24px 0 24px;
+  flex-shrink: 0;
 }
 
 .avatar {
@@ -26,13 +22,13 @@
   border-radius: 16px;
   background-color: #6C5CE7;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  flex-shrink: 0;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); /* Added a premium shadow */
   transition: opacity 0.2s;
 }
 
@@ -40,133 +36,117 @@
   opacity: 0.8;
 }
 
-.search {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
-  border-radius: 16px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border: 2px solid rgba(255, 255, 255, 1);
-}
-
-.search-icon {
-  color: #B2B2B2;
-  margin-right: 7px;
-}
-
-.search-input {
-  border: none;
-  outline: none;
-  background: transparent;
-  width: 100%;
-  font-size: 14px;
-}
-
 /* Hero — character floats above white card */
 .home-hero {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: -80px;  /* pulls white card up behind character */
-  margin-top: -30px;      /* adds space from top */
+  flex-shrink: 0;
   position: relative;
-  z-index: 1;            /* keeps character on top */
+  z-index: 2; /* Keeps character on top */
+  margin-bottom: -12vh; /* Dynamically pulls white card up based on phone size */
+  margin-top: 1vh;
 }
 
 .hero-image {
-  width: 300px;
-  height: 300px;
+  height: clamp(160px, 25vh, 260px); /* Shrinks automatically on small phones! */
+  width: auto;
   object-fit: contain;
 }
 
 /* Inside white card */
 .hero-name {
-  font-size: 26px;
+  font-size: clamp(20px, 4vh, 26px); /* Font scales perfectly */
   font-weight: bold;
   text-align: center;
   margin: 0 0 4px 0;
-  padding-top: 24px;     /* space so text isn't hidden behind character */
+  padding-top: 10vh; /* Dynamic space so character doesn't cover text */
 }
 
 .hero-subtitle {
   color: #7e7e7e;
-  font-size: 16px;
+  font-size: clamp(13px, 2vh, 16px);
   text-align: center;
-  margin: 0 0 24px 0;
+  margin: 0 0 3vh 0; /* Dynamic bottom margin */
 }
 
 /* Ulam of the Day */
 .section-title {
-  font-size: 20px;
+  font-size: clamp(16px, 2.5vh, 20px);
   font-weight: bold;
-  margin-left: 35px;
-  margin-bottom: 8px;
+  margin-left: 28px;
+  margin-bottom: 1vh;
 }
 
 .featured-card {
   background-color: #09DAF4;
-  border-radius: 27px;
-  padding: 15px 15px 10px 15px;
+  border-radius: 24px;
+  padding: 2vh 20px; /* Dynamic padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 6px 27px 27px 27px;
+  margin: 0 24px 2vh 24px;
+}
+
+.featured-info {
+  flex: 1;
 }
 
 .featured-name {
   font-weight: bold;
-  font-size: 17px;
+  font-size: clamp(15px, 2.2vh, 17px);
   color: rgb(0, 0, 0);
   margin: 0 0 4px 0;
 }
 
 .featured-time {
-  font-size: 13px;
+  font-size: clamp(11px, 1.5vh, 13px);
   color: #73797A;
   margin: 0;
   background-color: rgba(235, 235, 235, 0.6);
   border-radius: 12px;
-  padding: 5px 8px;
+  padding: 4px 8px;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
 
 .featured-likes {
-  font-size: 13px;
+  font-size: clamp(12px, 1.8vh, 13px);
   color: #006875;
-  margin: 10px 0 0 0;
+  margin: 1vh 0 0 0;
+  font-weight: 700;
 }
 
 .featured-img {
-  width: 72px;
-  height: 72px;
+  width: clamp(64px, 10vh, 72px);
+  height: clamp(64px, 10vh, 72px);
   border-radius: 12px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 /* Menu rows */
 .home-menu {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 5px 27px 15px 27px;
+  margin: 0 24px 0 24px;
 }
 
 .menu-item {
   background: white;
-  border-radius: 27px;
+  border-radius: 24px;
   border: 2px solid #D4D4D4;
-  padding: 14px 16px;
-  height: 75px;
+  padding: 1vh 16px;
+  height: clamp(65px, 9vh, 75px); /* Forces button height to scale */
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }
 
 .menu-icon {
-  font-size: 28px;
+  font-size: clamp(22px, 4vh, 28px);
 }
 
 .menu-text {
@@ -174,27 +154,27 @@
 }
 
 .menu-title {
-  font-weight: 500;
-  font-size: 16px;
-  margin: 0;
+  font-weight: 600;
+  font-size: clamp(14px, 2vh, 16px);
+  margin: 0 0 2px 0;
 }
 
 .menu-subtitle {
-  font-size: 13px;
+  font-size: clamp(11px, 1.5vh, 13px);
   font-weight: 500;
   color: #999;
-  margin-top: -4px;
+  margin: 0;
 }
 
 .menu-arrow {
   background-color: #CFBDFF;
   color: #5C57E6;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: clamp(28px, 4vh, 32px);
+  height: clamp(28px, 4vh, 32px);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: clamp(18px, 2.5vh, 20px);
   font-weight: 550;
 }

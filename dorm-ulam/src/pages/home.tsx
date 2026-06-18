@@ -3,7 +3,7 @@ import WhiteCard from '../components/whiteCard';
 
 interface Props {
   onSettings: () => void;
-  onQuickFixes: () => void;  /* Kept the same prop name so we don't break App.tsx! */
+  onQuickFixes: () => void;
   user: any;
 }
 
@@ -12,12 +12,9 @@ export default function Home({ onSettings, onQuickFixes, user }: Props) {
     <div className="home-screen">
 
       <header className="home-header">
+        {/* Avatar pushed to the top right! */}
         <div className="avatar" onClick={onSettings}>
           {user?.name?.charAt(0).toUpperCase() ?? 'U'} 
-        </div>
-        <div className="search">
-          <span className="search-icon material-symbols-outlined">search</span>
-          <input className="search-input" type="search" placeholder="Search" />
         </div>
       </header>
 
@@ -26,7 +23,6 @@ export default function Home({ onSettings, onQuickFixes, user }: Props) {
       </section>
 
       <WhiteCard>
-
         <h1 className="hero-name">Hi, Lab {user?.name?.split(' ')[0] ?? 'User'}!</h1>
         <p className="hero-subtitle">Luto na tayo!</p>
 
@@ -35,7 +31,10 @@ export default function Home({ onSettings, onQuickFixes, user }: Props) {
           <div className="featured-card">
             <div className="featured-info">
               <p className="featured-name">Sizzling Hotdog</p>
-              <p className="featured-time">⏱ 8 minutes</p>
+              <p className="featured-time">
+                <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>schedule</span>
+                8 minutes
+              </p>
               <p className="featured-likes">10 Likes</p>
             </div>
             <img src="/sizzling-hotdog.jpg" alt="Sizzling Hotdog" className="featured-img" />
@@ -43,9 +42,6 @@ export default function Home({ onSettings, onQuickFixes, user }: Props) {
         </section>
 
         <section className="home-menu">
-          {/* Tipid Meals has been completely removed! */}
-          
-          {/* Speedy Sarap Button */}
           <div className="menu-item" onClick={onQuickFixes}>
             <div className="menu-icon">⚡</div> 
             <div className="menu-text">
@@ -54,7 +50,6 @@ export default function Home({ onSettings, onQuickFixes, user }: Props) {
             </div>
             <span className="menu-arrow material-symbols-outlined">arrow_forward</span>
           </div>
-
         </section>
 
       </WhiteCard>
