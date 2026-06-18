@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './recipeMatches.css';
 import API_URL from '../config';
 import RecipeModal from '../components/recipeModal';
@@ -11,26 +11,71 @@ interface Props {
 }
 
 export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }: Props) {
-  const [saved, setSaved] = useState<number[]>([]);
+  // 1. Keep a local copy of the recipes so we can instantly update the likes count!
+  const [localRecipes, setLocalRecipes] = useState<any[]>(recipes);
+  
+  // 2. Sync likes with the Discover page using localStorage
+  const [liked, setLiked] = useState<number[]>(() => {
+    const saved = localStorage.getItem('liked_recipes');
+    return saved ? JSON.parse(saved) : [];
+  });
+  
   const [selected, setSelected] = useState<any>(null);
+  const processingRef = useRef<number[]>([]);
 
-  async function toggleSave(recipeId: number) {
-    const isSaved = saved.includes(recipeId);
-    const method = isSaved ? 'DELETE' : 'POST';
+  // Update local recipes if the parent component sends new ones
+  useEffect(() => {
+    setLocalRecipes(recipes);
+  }, [recipes]);
 
-    await fetch(`${API_URL}/api/saved/${recipeId}`, {
-      method,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true',
-      },
-    });
+  // 3. The exact same Like + Save logic from the Discover page
+  async function toggleLike(recipe: any) {
+    if (processingRef.current.includes(recipe.id)) return;
+    processingRef.current = [...processingRef.current, recipe.id];
 
-    if (isSaved) {
-      setSaved(saved.filter(id => id !== recipeId));
-    } else {
-      setSaved([...saved, recipeId]);
+    const isLiked = liked.includes(recipe.id);
+    const endpoint = isLiked ? 'unlike' : 'like';
+    const saveMethod = isLiked ? 'DELETE' : 'POST';
+
+    try {
+      // Hit the like endpoint to update the global count
+      const response = await fetch(`${API_URL}/api/recipes/${recipe.id}/${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
+
+      const data = await response.json();
+
+      // Hit the saved endpoint so it shows up in your Saved tab
+      await fetch(`${API_URL}/api/saved/${recipe.id}`, {
+        method: saveMethod,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
+
+      // Instantly update the number on the screen!
+      const updated = localRecipes.map(r =>
+        r.id === recipe.id ? { ...r, likes: data.likes } : r
+      );
+      setLocalRecipes(updated);
+
+      // Save the orange heart state
+      const newLiked = isLiked
+        ? liked.filter(id => id !== recipe.id)
+        : [...liked, recipe.id];
+
+      setLiked(newLiked);
+      localStorage.setItem('liked_recipes', JSON.stringify(newLiked));
+
+    } finally {
+      processingRef.current = processingRef.current.filter(id => id !== recipe.id);
     }
   }
 
@@ -50,14 +95,14 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
       </div>
 
       {/* SECTION 2: Recipe list */}
-      {recipes.length === 0 ? (
+      {localRecipes.length === 0 ? (
         <div style={{ textAlign: 'center', marginTop: '40px', color: '#888' }}>
           <p>No matching recipes found!</p>
           <p>Try adding more ingredients.</p>
         </div>
       ) : (
         <div className="matches-list">
-          {recipes.map(recipe => {
+          {localRecipes.map(recipe => {
             const steps = typeof recipe?.instructions === 'string'
               ? JSON.parse(recipe.instructions)
               : recipe?.instructions ?? [];
@@ -80,7 +125,6 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
                       )}
                     </div>
                     
-                    {/* UPDATED: Matches the Discover card meta layout */}
                     <div className="matches-card-meta">
                       <p className="matches-card-time">
                         <span className="material-symbols-outlined">schedule</span>
@@ -94,11 +138,12 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
 
                   </div>
                   <button
-                    className={`matches-like ${saved.includes(recipe.id) ? 'liked' : ''}`}
+                    className={`matches-like ${liked.includes(recipe.id) ? 'liked' : ''}`}
                     onClick={e => {
                       e.stopPropagation();
-                      toggleSave(recipe.id);
+                      toggleLike(recipe);
                     }}
+                    disabled={processingRef.current.includes(recipe.id)}
                   >
                     <span className="material-symbols-outlined">favorite</span>
                   </button>
