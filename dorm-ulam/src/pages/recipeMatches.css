@@ -30,11 +30,11 @@
 .matches-title {
   font-size: 22px;
   font-weight: 700;
-  margin: 0 0 2px 0;
+  margin: 16px 0 2px 0;
 }
 
 .matches-subtitle {
-  font-size: 13px;
+  font-size: 14px;
   color: #888;
   margin: 0;
 }
