@@ -82,7 +82,7 @@ export default function App() {
         token={token} 
         onBack={() => setScreen('app')}
         onLogout={handleLogout}
-        onUpdateUser={(updatedUser) => {  {/* ← Let settings update the global profile */}
+        onUpdateUser={(updatedUser) => {  /* ← Let settings update the global profile */
           setUser(updatedUser);
           localStorage.setItem('user', JSON.stringify(updatedUser));
         }}
@@ -104,21 +104,24 @@ export default function App() {
     );
   }
 
-    if (screen === 'cooking') {
+  if (screen === 'cooking') {
     return (
       <CookingSteps
         recipe={selectedRecipe}
         token={token}
         onBack={() => {
-          // App.tsx reads it, deletes it, THEN navigates!
+          // App.tsx reads the origin, deletes it, THEN navigates!
           const origin = localStorage.getItem('cooking_origin');
           localStorage.removeItem('cooking_origin');
           
           if (origin === 'discover') {
-            setScreen('app'); // App mode...
-            setActiveTab('discover'); // ...specifically Discover tab
+            setScreen('app'); 
+            setActiveTab('discover'); 
           } else if (origin === 'quick') {
-            setScreen('quick'); // Back to Speedy Sarap
+            setScreen('quick'); 
+          } else if (origin === 'home') { // ← THIS ENSURES HOME PAGE ROUTING WORKS!
+            setScreen('app');
+            setActiveTab('home');
           } else {
             setScreen('matches'); // Default fallback
           }
@@ -148,12 +151,16 @@ export default function App() {
     <>
       <div className="app-wrapper">
         {activeTab === 'home' && (
-          <Home
-            user={user}
-            onSettings={() => setScreen('settings')}
-            onQuickFixes={() => setScreen('quick')}   
-          />
-        )}
+        <Home 
+          user={user} 
+          onSettings={() => setScreen('settings')} 
+          onQuickFixes={() => setScreen('quick')}
+          onStartCooking={(recipe) => {
+            setSelectedRecipe(recipe);
+            setScreen('cooking');
+          }}
+        />
+      )}
         {activeTab === 'cook' && (
           <Cook onGenerate={(recipes) => {
             setMatchedRecipes(recipes);
@@ -168,7 +175,7 @@ export default function App() {
             onStartCooking={(recipe) => {
               setSelectedRecipe(recipe);
               setScreen('cooking');
-              // We will add a way to tell the app we came from 'discover'
+              // Tell the app we came from 'discover'
               localStorage.setItem('cooking_origin', 'discover'); 
             }}
           />
