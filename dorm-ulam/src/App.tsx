@@ -148,13 +148,15 @@ export default function App() {
           }} />
         )}
         {activeTab === 'discover' && (
-          <Discover
-            token={token}
-            user={user}
-            onSettings={() => setScreen('settings')}
+          <Discover 
+            token={token} 
+            user={user} 
+            onSettings={() => setScreen('settings')} 
             onStartCooking={(recipe) => {
               setSelectedRecipe(recipe);
               setScreen('cooking');
+              // We will add a way to tell the app we came from 'discover'
+              localStorage.setItem('cooking_origin', 'discover'); 
             }}
           />
         )}

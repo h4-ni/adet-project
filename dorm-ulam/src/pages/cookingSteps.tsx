@@ -23,9 +23,14 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
   const step = steps[currentStep];
   const progress = steps.length > 0 ? ((currentStep + 1) / steps.length) * 100 : 0;
 
-  // calculate total time from all steps
   const totalSeconds = steps.reduce((sum: number, s: any) => sum + (s.timerSeconds ?? 0), 0);
   const totalMins = Math.ceil(totalSeconds / 60);
+
+  // UPDATED: Logic to handle dynamic back navigation
+  const handleBack = () => {
+    localStorage.removeItem('cooking_origin'); // Clean up directly
+    onBack(); 
+  };
 
   useEffect(() => {
     setTimeLeft(step?.timerSeconds ?? 0);
@@ -72,28 +77,21 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
   const mins = String(Math.floor(timeLeft / 60)).padStart(2, '0');
   const secs = String(timeLeft % 60).padStart(2, '0');
 
-  // Congratulations screen
   if (done) {
     return (
       <div className="cooking-screen">
         <div className="congrats-container">
-
           <div className="congrats-top">
             <p className="congrats-emoji">🎉</p>
             <h1 className="congrats-title">Luto na!</h1>
             <p className="congrats-subtitle">
-            You just cooked <span className="congrats-highlight">{recipe.name}</span>.
-            <br />
-            Eatwell, Lab!
-          </p>
+              You just cooked <span className="congrats-highlight">{recipe.name}</span>.
+              <br />
+              Eatwell, Lab!
+            </p>
           </div>
-
           <div className="congrats-card">
-            <img
-              src={`/${recipe.image}`}
-              alt={recipe.name}
-              className="congrats-img"
-            />
+            <img src={`/${recipe.image}`} alt={recipe.name} className="congrats-img" />
             <div className="congrats-card-bottom">
               <div className="congrats-card-info">
                 <p className="congrats-card-name">{recipe.name}</p>
@@ -102,19 +100,14 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
                   {totalMins} minutes
                 </p>
               </div>
-              <button
-                className={`congrats-like ${saved ? 'liked' : ''}`}
-                onClick={toggleSave}
-              >
+              <button className={`congrats-like ${saved ? 'liked' : ''}`} onClick={toggleSave}>
                 <span className="material-symbols-outlined">favorite</span>
               </button>
             </div>
           </div>
-
           <button className="congrats-btn" onClick={onDone}>
             Back to Home
           </button>
-
         </div>
       </div>
     );
@@ -122,9 +115,9 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
 
   return (
     <div className="cooking-screen">
-
       <div className="cooking-progress-row">
-        <button className="cooking-back" onClick={onBack}>
+        {/* Updated to use handleBack instead of onBack directly */}
+        <button className="cooking-back" onClick={handleBack}>
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
         <div className="cooking-progress-info">
@@ -176,7 +169,6 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
           <span className="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
-
     </div>
   );
 }
