@@ -40,6 +40,30 @@
   opacity: 0.8;
 }
 
+/* Search Bar (Shared for Discover and Saved) */
+.search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.search-icon {
+  color: #B2B2B2;
+  margin-right: 7px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+}
+
 /* Hero */
 .home-hero {
   display: flex;
