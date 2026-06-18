@@ -5,6 +5,7 @@
   flex-direction: column; /* ← required! */
   overflow: hidden;    /* ← prevents horizontal scroll from the wider white card */
   font-family: 'Inter', sans-serif;
+  
 }
 
 /* Top peach section */

@@ -1,13 +1,11 @@
 /* Saved.css */
 
 .saved-screen {
-  background: linear-gradient(180deg, #FFB693 -40%, #F3F3F3 40%);
+  background-color: #F3F3F3; /* Ensures the bottom is always clean light gray/white */
+  background-image: linear-gradient(180deg, #FFB693 -10vh, #F3F3F3 45vh);
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Locks the gradient so it doesn't stretch when you scroll! */
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  padding-bottom: 100px;
 }
 
 
