@@ -172,11 +172,21 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
         )}
       </WhiteCard>
 
+      {/* UPDATED MODAL LOGIC */}
       {selected && (
         <RecipeModal 
           recipe={selected} 
           onClose={() => setSelected(null)} 
-          onStartCooking={onStartCooking} 
+          onStartCooking={(r) => {
+            // 1. Bookmark our origin page so the back button knows where to return
+            localStorage.setItem('cooking_origin', 'discover');
+            
+            // 2. Close this modal so it's not open when we come back later
+            setSelected(null);
+            
+            // 3. Trigger the navigation prop
+            onStartCooking(r);
+          }} 
         />
       )}
 

@@ -104,12 +104,25 @@ export default function App() {
     );
   }
 
-  if (screen === 'cooking') {
+    if (screen === 'cooking') {
     return (
       <CookingSteps
         recipe={selectedRecipe}
         token={token}
-        onBack={() => setScreen('matches')}
+        onBack={() => {
+          // App.tsx reads it, deletes it, THEN navigates!
+          const origin = localStorage.getItem('cooking_origin');
+          localStorage.removeItem('cooking_origin');
+          
+          if (origin === 'discover') {
+            setScreen('app'); // App mode...
+            setActiveTab('discover'); // ...specifically Discover tab
+          } else if (origin === 'quick') {
+            setScreen('quick'); // Back to Speedy Sarap
+          } else {
+            setScreen('matches'); // Default fallback
+          }
+        }}
         onDone={() => {
           setScreen('app');
           setActiveTab('home');

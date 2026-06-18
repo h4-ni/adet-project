@@ -26,10 +26,14 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
   const totalSeconds = steps.reduce((sum: number, s: any) => sum + (s.timerSeconds ?? 0), 0);
   const totalMins = Math.ceil(totalSeconds / 60);
 
-  // UPDATED: Logic to handle dynamic back navigation
+  // Clean navigation handlers
   const handleBack = () => {
-    localStorage.removeItem('cooking_origin'); // Clean up directly
     onBack(); 
+  };
+
+  const handleDone = () => {
+    localStorage.removeItem('cooking_origin'); // Clean up when finished!
+    onDone();
   };
 
   useEffect(() => {
@@ -105,7 +109,8 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
               </button>
             </div>
           </div>
-          <button className="congrats-btn" onClick={onDone}>
+          {/* Using handleDone here */}
+          <button className="congrats-btn" onClick={handleDone}>
             Back to Home
           </button>
         </div>
@@ -116,7 +121,7 @@ export default function CookingSteps({ recipe, token, onBack, onDone }: Props) {
   return (
     <div className="cooking-screen">
       <div className="cooking-progress-row">
-        {/* Updated to use handleBack instead of onBack directly */}
+        {/* Using handleBack here */}
         <button className="cooking-back" onClick={handleBack}>
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
