@@ -9,11 +9,61 @@
   box-sizing: border-box; /* Crucial so padding doesn't stretch the screen */
 }
 
+/* Header (Shared across Home, Discover, and Saved) */
 .home-header {
   display: flex;
-  justify-content: flex-end; /* Moves avatar cleanly to the right */
-  padding: 24px 24px 0 24px;
+  align-items: center;
+  justify-content: flex-start; /* Forces the avatar back to the left side! */
+  gap: 12px;
+  padding: 48px 24px 8px 24px; /* Keeps your top spacing safe */
+  width: 100%;
+  box-sizing: border-box;
   flex-shrink: 0;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background-color: #6C5CE7;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); 
+  transition: opacity 0.2s;
+  flex-shrink: 0; /* Prevents the avatar from squishing when the search bar is there */
+}
+
+.avatar:hover {
+  opacity: 0.8;
+}
+
+/* Search Bar (Shows up perfectly in Discover and Saved) */
+.search {
+  flex: 1; /* Tells the search bar to stretch and fill the remaining space */
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.search-icon {
+  color: #B2B2B2;
+  margin-right: 7px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
 }
 
 .avatar {
