@@ -1,9 +1,14 @@
 .cooking-screen {
-  background-color: #F3F3F3; /* Ensures the bottom is always clean light gray/white */
+  background-color: #F3F3F3; 
   background-image: linear-gradient(180deg, #FFB693 -10vh, #F3F3F3 45vh);
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Locks the gradient so it doesn't stretch when you scroll! */
+  background-attachment: fixed; 
   min-height: 100vh;
+  box-sizing: border-box; /* Crucial so padding doesn't break the screen size */
+  padding: 56px 24px 40px 24px; /* Adds perfect breathing room around the edges */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Automatically adds clean space between EVERY card! */
 }
 
 /* Progress row */
@@ -187,8 +192,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 24px 24px 24px;
+  padding: 10px 0 24px 0; /* Removed horizontal padding so it doesn't double-pad */
   gap: 16px;
+  margin: auto 0; /* This magically centers the congrats screen vertically! */
+  width: 100%;
 }
 
 .congrats-top {
