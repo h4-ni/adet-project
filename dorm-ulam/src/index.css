@@ -11,7 +11,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #FDDEC9;  /* ← match app background, no gray */
+  /* FIXED: Changed to light gray/white so the bottom is always clean */
+  background-color: #F3F3F3;  
   font-family: 'Inter', sans-serif;
   overflow: hidden;
   position: fixed;
@@ -27,4 +28,6 @@ html, body {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+  /* ADDED: Ensures root is invisible so your page gradients shine through */
+  background-color: transparent; 
 }
