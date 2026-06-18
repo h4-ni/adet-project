@@ -116,7 +116,7 @@ export default function Discover({ onSettings, token, user, onStartCooking }: Pr
       </header>
 
       <section className="discover-hero">
-        <img src="/discover.png" alt="discover-icon" className="hero-food-img" />
+        <img src="/discover-1.png" alt="discover-icon" className="hero-food-img" />
       </section>
 
       <WhiteCard>
