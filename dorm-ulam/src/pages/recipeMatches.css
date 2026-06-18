@@ -48,7 +48,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin:5px 20px 15px 20px;
+  margin: 5px 20px 15px 20px;
 }
 
 .matches-card {
@@ -94,36 +94,47 @@
   font-weight: 600;
 }
 
-.matches-card-time {
+/* NEW: Meta Info (Time & Likes) */
+.matches-card-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.matches-card-time, 
+.matches-card-likes {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  color: #888;
   margin: 0;
 }
 
-.matches-card-time .material-symbols-outlined {
+.matches-card-time {
+  color: #888;
+}
+
+.matches-card-likes {
+  color: #E8681A;
+}
+
+.matches-card-time .material-symbols-outlined,
+.matches-card-likes .material-symbols-outlined {
   font-size: 14px;
 }
 
-/* Like button */
+/* Clickable Heart Button - Updated to match Discover page */
 .matches-like {
-  background: #f0f0f0;
+  background: none;
   border: none;
   cursor: pointer;
-  color: #ccc;
+  color: #ccc; /* Gray when un-saved */
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
   padding: 0;
-  flex-shrink: 0;
 }
 
 .matches-like.liked {
-  background: #E8681A;
-  color: white;
+  color: #E8681A; /* Orange when saved */
 }

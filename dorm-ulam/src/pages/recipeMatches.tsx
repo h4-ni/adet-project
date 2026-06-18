@@ -79,10 +79,19 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
                         <span className="missing-badge">Missing Ingredient!</span>
                       )}
                     </div>
-                    <p className="matches-card-time">
-                      <span className="material-symbols-outlined">schedule</span>
-                      {totalMins} minutes
-                    </p>
+                    
+                    {/* UPDATED: Matches the Discover card meta layout */}
+                    <div className="matches-card-meta">
+                      <p className="matches-card-time">
+                        <span className="material-symbols-outlined">schedule</span>
+                        {totalMins} mins
+                      </p>
+                      <p className="matches-card-likes">
+                        <span className="material-symbols-outlined">favorite</span>
+                        {recipe.likes || 0}
+                      </p>
+                    </div>
+
                   </div>
                   <button
                     className={`matches-like ${saved.includes(recipe.id) ? 'liked' : ''}`}
