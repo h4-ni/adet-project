@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './recipeMatches.css';
 import API_URL from '../config';
+import RecipeModal from '../components/recipeModal';
 
 interface Props {
   recipes: any[];
@@ -11,6 +12,7 @@ interface Props {
 
 export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }: Props) {
   const [saved, setSaved] = useState<number[]>([]);
+  const [selected, setSelected] = useState<any>(null);
 
   async function toggleSave(recipeId: number) {
     const isSaved = saved.includes(recipeId);
@@ -34,7 +36,6 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
 
   return (
     <div className="matches-screen">
-
       {/* SECTION 1: Header */}
       <div className="matches-header">
         <button className="matches-back" onClick={onBack}>
@@ -64,7 +65,7 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
             const totalMins = Math.ceil(totalSeconds / 60);
 
             return (
-              <div key={recipe.id} className="matches-card" onClick={() => onSelectRecipe(recipe)}>
+              <div key={recipe.id} className="matches-card" onClick={() => setSelected(recipe)}>
                 <img
                   src={`/${recipe.image}`}
                   alt={recipe.name}
@@ -99,6 +100,17 @@ export default function RecipeMatches({ recipes, token, onBack, onSelectRecipe }
         </div>
       )}
 
+      {/* Modal Integration */}
+      {selected && (
+        <RecipeModal
+          recipe={selected}
+          onClose={() => setSelected(null)}
+          onStartCooking={() => {
+            setSelected(null);
+            onSelectRecipe(selected);
+          }}
+        />
+      )}
     </div>
   );
 }
