@@ -62,7 +62,7 @@ export default function Home({ onSettings, onQuickFixes, onStartCooking, user }:
       </section>
 
       <WhiteCard>
-        <h1 className="hero-name">Hi, Lab {user?.name?.split(' ')[0] ?? 'User'}!</h1>
+        <h1 className="hero-name">Hi, Lab {user?.name?.split(' ')[0] ?? 'User'} ko</h1>
         <p className="hero-subtitle">Luto na tayo!</p>
 
         <section className="ulam-section">
