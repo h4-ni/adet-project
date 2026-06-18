@@ -5,7 +5,7 @@
   background-attachment: fixed; 
   min-height: 100vh;
   box-sizing: border-box; /* Crucial so padding doesn't break the screen size */
-  padding: 56px 24px 40px 24px; /* Adds perfect breathing room around the edges */
+  padding: 30px 24px 40px 24px; /* Adds perfect breathing room around the edges */
   display: flex;
   flex-direction: column;
   gap: 16px; /* Automatically adds clean space between EVERY card! */
