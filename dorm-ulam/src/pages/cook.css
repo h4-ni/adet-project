@@ -1,8 +1,18 @@
 .cook-screen {
-  background: linear-gradient(180deg, #FFB693 -40%, #F3F3F3 40%);
+ /* 1. The Universal Background Fix (Matches Discover exactly!) */
+  background-color: #F3F3F3; 
+  background-image: linear-gradient(180deg, #FFB693 -10vh, #F3F3F3 45vh);
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  
+  /* 2. The Bottom Nav Cutoff Fix */
   min-height: 100vh;
+  box-sizing: border-box; /* Ensures the padding doesn't stretch the screen width */
+  padding: 3px 24px 120px 24px; /* Increased bottom padding to 120px to safely clear the nav bar! */
+  
   font-family: 'Inter', sans-serif;
-  padding: 3px 24px 100px 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cook-title {
