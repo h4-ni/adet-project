@@ -8,16 +8,28 @@
   --color-brand-dark: #1A1C1E;
 }
 
+/* 1. UNIVERSAL BOX-SIZING FIX */
+/* This is the magic rule that stops padding from making your screen too wide! */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. GLOBAL BODY */
 html, body {
   margin: 0;
   padding: 0;
-  /* Changed to pure white so the Home page blends perfectly with the bottom nav */
-  background-color: #FFFFFF;  
+  background-color: #FFFFFF;  /* Keeps the bottom nav blending perfectly */
   font-family: 'Inter', sans-serif;
-  /* REMOVED: position: fixed and overflow: hidden (These break mobile screen heights!) */
   min-height: 100%;
+  width: 100%;
+  
+  /* These three lines physically prevent horizontal swiping and zooming out */
+  overflow-x: hidden; 
+  touch-action: pan-y; 
+  -webkit-text-size-adjust: 100%; 
 }
 
+/* 3. MOBILE CONTAINER */
 #root {
   width: 100%;
   max-width: 390px;
@@ -25,4 +37,11 @@ html, body {
   min-height: 100vh;
   position: relative;
   background-color: transparent; 
+  overflow-x: hidden; /* Locks the content inside the 390px box */
+}
+
+/* 4. HIDE SCROLLBARS FOR A NATIVE FEEL */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
