@@ -537,5 +537,77 @@ class RecipeSeeder extends Seeder
             'equipment' => ['Knife', 'Chopping Board', 'Bowl', 'Fork', 'Pan', 'Spatula', 'Plate'],
             'likes' => 5,
         ]);
+
+        Recipe::create([
+            'name' => 'Hamsilog',
+            'image' => 'hamsilog.jpg',
+            'cook_time' => 15,
+            'instructions' => json_encode([
+                ['title' => 'Step 1: The Prep', 'instruction' => 'Chop the Spring onion and garlic.', 'timerSeconds' => 120, 'equipment' => ['Knife', 'Chopping Board']],
+                ['title' => 'Step 2: Fry garlic', 'instruction' => 'Put the oil in the pan and also put the garlic and mix it together. Finish until the garlic is well browned.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 3: Add rice', 'instruction' => 'Add the leftover rice and mix it with the garlic.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 4: Season Sinangag', 'instruction' => 'Now add the salt and spring onion then mix it all together. Set the fried rice aside.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 5: Prep for egg', 'instruction' => 'Add a bit of oil in the pan.', 'timerSeconds' => 30, 'equipment' => ['Frying Pan']],
+                ['title' => 'Step 6: Cook egg', 'instruction' => 'Add the egg and cook it, add salt on the egg then a little bit of water.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 7: Cook ham & Serve', 'instruction' => 'Add oil and cook the ham. When finished, plate it all together and serve hot.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Plate']],
+            ]),
+            'ingredients' => ['leftover rice', 'spring onion', 'garlic', 'salt', 'oil', 'egg', 'ham'],
+            'equipment' => ['Knife', 'Chopping Board', 'Frying Pan', 'Spatula', 'Plate'],
+            'likes' => 12,
+        ]);
+
+        Recipe::create([
+            'name' => 'Bacsilog',
+            'image' => 'bacsilog.jpg',
+            'cook_time' => 15,
+            'instructions' => json_encode([
+                ['title' => 'Step 1: The Prep', 'instruction' => 'Chop the Spring onion and garlic.', 'timerSeconds' => 120, 'equipment' => ['Knife', 'Chopping Board']],
+                ['title' => 'Step 2: Fry garlic', 'instruction' => 'Put the oil in the pan and also put the garlic and mix it together. Finish until the garlic is well browned.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 3: Add rice', 'instruction' => 'Add the leftover rice and mix it with the garlic.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 4: Season Sinangag', 'instruction' => 'Now add the salt and spring onion then mix it all together. Set the fried rice aside.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 5: Prep for egg', 'instruction' => 'Add a bit of oil in the pan.', 'timerSeconds' => 30, 'equipment' => ['Frying Pan']],
+                ['title' => 'Step 6: Cook egg', 'instruction' => 'Add the egg and cook it, add salt on the egg then a little bit of water.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 7: Cook bacon & Serve', 'instruction' => 'Add the bacon to the pan and cook it. Put it all together on a plate and serve.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Plate']],
+            ]),
+            'ingredients' => ['leftover rice', 'spring onion', 'garlic', 'salt', 'oil', 'egg', 'bacon'],
+            'equipment' => ['Knife', 'Chopping Board', 'Frying Pan', 'Spatula', 'Plate'],
+            'likes' => 18,
+        ]);
+
+        Recipe::create([
+            'name' => 'Tosilog',
+            'image' => 'tosilog.jpg',
+            'cook_time' => 15,
+            'instructions' => json_encode([
+                ['title' => 'Step 1: ThePrep', 'instruction' => 'Chop the Spring onion and garlic.', 'timerSeconds' => 120, 'equipment' => ['Knife', 'Chopping Board']],
+                ['title' => 'Step 2: Fry garlic', 'instruction' => 'Put the oil in the pan and also put the garlic and mix it together. Finish until the garlic is well browned.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 3: Add rice', 'instruction' => 'Add the leftover rice and mix it with the garlic.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 4: Season Sinangag', 'instruction' => 'Now add the salt and spring onion then mix it all together. Set the fried rice aside.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 5: Prep for egg', 'instruction' => 'Add a bit of oil in the pan.', 'timerSeconds' => 30, 'equipment' => ['Frying Pan']],
+                ['title' => 'Step 6: Cook egg', 'instruction' => 'Add the egg and cook it, add salt on the egg then a little bit of water.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 7: Cook tocino & Serve', 'instruction' => 'Then cook the tocino and once finished, plate everything together.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Plate']],
+            ]),
+            'ingredients' => ['leftover rice', 'spring onion', 'garlic', 'salt', 'oil', 'egg', 'tocino'],
+            'equipment' => ['Knife', 'Chopping Board', 'Frying Pan', 'Spatula', 'Plate'],
+            'likes' => 24,
+        ]);
+
+        Recipe::create([
+            'name' => 'Hotsilog',
+            'image' => 'hotsilog.jpg',
+            'cook_time' => 15,
+            'instructions' => json_encode([
+                ['title' => 'Step 1: The Prep', 'instruction' => 'Chop the Spring onion and garlic.', 'timerSeconds' => 120, 'equipment' => ['Knife', 'Chopping Board']],
+                ['title' => 'Step 2: Fry garlic', 'instruction' => 'Put the oil in the pan and also put the garlic and mix it together. Finish until the garlic is well browned.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 3: Add rice', 'instruction' => 'Add the leftover rice and mix it with the garlic.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 4: Season Sinangag', 'instruction' => 'Now add the salt and spring onion then mix it all together. Set the fried rice aside.', 'timerSeconds' => 120, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 5: Prep for egg', 'instruction' => 'Add a bit of oil in the pan.', 'timerSeconds' => 30, 'equipment' => ['Frying Pan']],
+                ['title' => 'Step 6: Cook egg', 'instruction' => 'Add the egg and cook it, add salt on the egg then a little bit of water.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Spatula']],
+                ['title' => 'Step 7: Cook hotdog & Serve', 'instruction' => 'Cook the hotdog and then put it all together on a plate when done.', 'timerSeconds' => 180, 'equipment' => ['Frying Pan', 'Plate']],
+            ]),
+            'ingredients' => ['leftover rice', 'spring onion', 'garlic', 'salt', 'oil', 'egg', 'hotdog'],
+            'equipment' => ['Knife', 'Chopping Board', 'Frying Pan', 'Spatula', 'Plate'],
+            'likes' => 15,
+        ]);
     }
 }
